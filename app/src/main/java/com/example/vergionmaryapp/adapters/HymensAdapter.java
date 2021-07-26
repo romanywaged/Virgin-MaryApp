@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vergionmaryapp.R;
-import com.example.vergionmaryapp.models.Hymens;
+import com.example.vergionmaryapp.database.entities.Hymens;
 
 import java.util.List;
 
