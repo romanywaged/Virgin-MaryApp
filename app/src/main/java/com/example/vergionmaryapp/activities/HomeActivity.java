@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         move(Hymens, HymensActivity.class);
+        move(Booking, BookingActivity.class);
 
     }
 
