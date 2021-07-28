@@ -1,11 +1,16 @@
 package com.example.vergionmaryapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.example.vergionmaryapp.R;
 import com.example.vergionmaryapp.adapters.HymensAdapter;
@@ -52,6 +57,10 @@ public class HymensActivity extends AppCompatActivity implements OnHymensClick {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        getSupportActionBar().setTitle("ترانيم وتماجيد العدرا");
     }
 
     @Override
@@ -61,4 +70,39 @@ public class HymensActivity extends AppCompatActivity implements OnHymensClick {
         intent.putExtra("Name",hymens.getName());
         startActivity(intent);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.main_menu,menu);
+        MenuItem searchitem=menu.findItem(R.id.search2);
+        SearchView searchView=(SearchView)searchitem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
