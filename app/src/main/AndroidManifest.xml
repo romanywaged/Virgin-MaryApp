@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.BookingActivity"></activity>
+        <activity android:name=".activities.WordsActivity"
+            android:theme="@style/TarnemaStyle"
+            ></activity>
+        <activity android:name=".activities.BookingActivity" />
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

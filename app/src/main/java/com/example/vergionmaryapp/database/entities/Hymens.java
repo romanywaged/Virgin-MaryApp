@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Hymens {
 
     @PrimaryKey(autoGenerate = true)
-    int id;
+    public int id;
 
     String name;
 
@@ -16,6 +16,11 @@ public class Hymens {
 
 
     public Hymens() {
+    }
+
+    public Hymens(String name, String words) {
+        this.name = name;
+        this.words = words;
     }
 
     public int getId() {

@@ -8,11 +8,13 @@ import androidx.room.RoomDatabase;
 
 import com.example.vergionmaryapp.database.entities.Hymens;
 
-@Database(entities = {Hymens.class}, version = 1, exportSchema = false)
+@Database(entities = {Hymens.class}, version = 3, exportSchema = false)
 
 public abstract class HymensDatabase extends RoomDatabase {
 
     public static HymensDatabase instance;
+
+    public abstract HymensDao getDao();
 
     public static synchronized HymensDatabase getInstance(Context context)
     {
