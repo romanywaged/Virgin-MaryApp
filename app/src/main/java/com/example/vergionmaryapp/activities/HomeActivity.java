@@ -1,14 +1,29 @@
 package com.example.vergionmaryapp.activities;
 
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.vergionmaryapp.R;
 import com.example.vergionmaryapp.booking.showEvents.EventListViewActivity;
+import com.example.vergionmaryapp.database.RoomFactory;
+import com.example.vergionmaryapp.database.asynck.InsertHymensTask;
+import com.example.vergionmaryapp.database.entities.Hymens;
+import com.example.vergionmaryapp.models.SetUpDatabase;
+import com.example.vergionmaryapp.models.SharedPrefrenceModel;
+import com.google.android.material.tabs.TabLayout;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +46,8 @@ public class HomeActivity extends AppCompatActivity {
     Button About;
 
 
+    SharedPrefrenceModel sharedPrefrenceModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -42,6 +59,17 @@ public class HomeActivity extends AppCompatActivity {
 
         openEventsListView(bookAodas, 1);
         openEventsListView(bookNahda, 2);
+
+
+        sharedPrefrenceModel = new SharedPrefrenceModel(HomeActivity.this);
+        if (!sharedPrefrenceModel.Check()) {
+
+            SetUpDatabase database = new SetUpDatabase(HomeActivity.this);
+            database.readTittle();
+            database.setup();
+            sharedPrefrenceModel.SaveShared(true);
+        }
+
     }
 
 
@@ -65,5 +93,6 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
     }
+
 
 }

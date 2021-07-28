@@ -8,15 +8,24 @@
     android:layout_marginTop="8dp"
     android:id="@+id/cardview"
     >
+    <RelativeLayout
 
-    <TextView
-        android:id="@+id/hymens_tittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="tittle"
-        android:gravity="right|center_vertical"
-        android:layout_marginRight="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary"/>
+        android:padding="8dp"
+        >
+        <TextView
+            android:id="@+id/hymens_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:maxLines="1"
+            android:text="tittle"
+            android:ellipsize="end" />
+    </RelativeLayout>
+
 </androidx.cardview.widget.CardView>
