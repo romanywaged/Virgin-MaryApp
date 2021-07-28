@@ -3,6 +3,7 @@
     <color name="colorPrimary">#00b0ff</color>
     <color name="colorPrimaryDark">#00b0ff</color>
     <color name="colorAccent">#00b0ff</color>
+    <color name="tarns_blue">#5600B0FF</color>
     <color name="darkgray">#6c6c6c</color>
     <color name="bg_card">#f6f6f6</color>
     <color name="item_text_color">#258bd6</color>

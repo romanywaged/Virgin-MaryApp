@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">كنيسة السيده العذراء مريم بالقصيرين</string>
     <string name="Hymens">ترانيم وتماجيد العدرا</string>
-    <string name="booking">حجز القداسات والنهضه</string>
+    <string name="booking_aodas">حجز القداسات</string>
+    <string name="booking_nahda">حجز النهضة</string>
     <string name="about">عن البرنامج</string>
+
+    <string name="loading">جاري التسجيل</string>
+    <string name="no_data_found">لا يوجد بيانات</string>
+    <string name="no_internet_connection">لا يوجد اتصال بالانترنت</string>
 </resources>

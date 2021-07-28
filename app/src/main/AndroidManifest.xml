@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vergionmaryapp">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/appicon"
@@ -20,6 +21,11 @@
         <activity
             android:name=".activities.HymensActivity"
             android:theme="@style/AddChoirTheme" />
+
+        <activity
+            android:name=".base.baseView.MyBaseActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
