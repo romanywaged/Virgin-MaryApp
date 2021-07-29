@@ -283,12 +283,21 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     @SuppressLint("SetTextI18n")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+
         savedDay = dayOfMonth
         savedMonth = month
         savedYear = year
 
-
-        birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+        if (savedDay<10 || savedMonth < 10)
+        {
+            var strDay:String = "0" + "$savedDay"
+            var strMonth:String = "0" + "$savedMonth"
+            birthdayDateET.setText("$savedYear-" + strMonth + "-" + strDay)
+        }
+        else
+        {
+            birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+        }
     }
 
 
