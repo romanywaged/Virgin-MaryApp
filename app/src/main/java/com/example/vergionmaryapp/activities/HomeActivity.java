@@ -56,6 +56,8 @@ public class HomeActivity extends AppCompatActivity
     @OnClick(R.id.aboutCardView)
     public void openAboutView()
     {
+        Intent intent = new Intent(HomeActivity.this,AboutActivity.class);
+        startActivity(intent);
     }
 
     private void openElReservationEventsView(int categoryId)

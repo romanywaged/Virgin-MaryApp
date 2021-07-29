@@ -8,4 +8,7 @@
     <string name="loading">جاري التسجيل</string>
     <string name="no_data_found">لا يوجد بيانات</string>
     <string name="no_internet_connection">لا يوجد اتصال بالانترنت</string>
+
+    <string name="rightsString">جميع الحقوق محفوظه</string>
+    <string name="AboutString">هذا البرنامج خاص بكنيسة العذراء مريم بالقصيرين - الزاويه الحمراء خاص بحجز قداسات ونهضات العدرا فى عام 2021</string>
 </resources>
