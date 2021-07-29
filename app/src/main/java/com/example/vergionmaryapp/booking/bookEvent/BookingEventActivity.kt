@@ -1,12 +1,16 @@
 package com.example.vergionmaryapp.booking.bookEvent
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.StringBuilderPrinter
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vergionmaryapp.MyFreeApplication
@@ -23,10 +27,12 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_booking_event.*
 import kotlinx.android.synthetic.main.activity_reserve_event.*
 import java.lang.ref.WeakReference
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
-class BookingEventActivity : AppCompatActivity(), IBookingController.View
+class BookingEventActivity : AppCompatActivity(), IBookingController.View, DatePickerDialog.OnDateSetListener
 {
     @Inject
     lateinit var interactor : BookingInteractor
@@ -42,6 +48,16 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
     private var eventId = 0
     private var userGender = 0
     private var pageTitle = ""
+
+//Romany
+    private var day = 0
+    private var Month = 0
+    private var Year = 0
+
+
+    private var savedDay = 0
+    private var savedMonth = 0
+    private var savedYear = 0
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -62,6 +78,12 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
+
+
+
+
+        //Romany
+        getBirthday()
     }
 
     override fun onStart()
@@ -103,6 +125,9 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
             requestBookingBody.userObject = userList
 
             presenter!!.submitBookingObject(requestBookingBody)
+
+
+            birthdayDateET.inputType = 0
         }
 
         cancelBtn.setOnClickListener {
@@ -166,6 +191,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
                         userObject.userFullName = fullName
                         userObject.userNationalId = nationalId
                         userObject.userGenderId = userGender
+
                         userList.add(userObject)
                         requestBookingBody.userObject = userList
 
@@ -219,4 +245,40 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         presenter!!.detachedView()
         isAttached = false
     }
+
+
+
+
+    //Romany
+
+    private fun getBirthday()
+    {
+        birthdayDateET.setOnClickListener({
+            getDateCalender()
+            DatePickerDialog(this, this, Year,Month,day).show()
+        })
+    }
+
+
+    private fun getDateCalender()
+    {
+        var calender:Calendar = Calendar.getInstance()
+        day = calender.get(Calendar.DAY_OF_MONTH)
+        Month = calender.get(Calendar.MONTH)
+        Year = calender.get(Calendar.YEAR)
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        savedDay = dayOfMonth
+        savedMonth = month
+        savedYear = year
+
+
+        birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+    }
+
+
+
 }
