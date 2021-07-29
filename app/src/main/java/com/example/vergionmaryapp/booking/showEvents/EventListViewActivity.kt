@@ -4,17 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
-import com.example.vergionmaryapp.base.baseView.MyBaseActivity
 import com.example.vergionmaryapp.booking.showEvents.adapter.EventsListAdapter
 import com.example.vergionmaryapp.booking.showEvents.adapter.IEventsClickListener
 import com.example.vergionmaryapp.models.booking.EventModule
 import com.example.vergionmaryapp.utils.CommonMethod
 import com.example.vergionmaryapp.utils.MyApplicationSharedPreference
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_el_nahda.view.*
@@ -22,7 +21,7 @@ import java.lang.ref.WeakReference
 import java.util.ArrayList
 import javax.inject.Inject
 
-class EventListViewActivity : MyBaseActivity(), IEventsController.View, IEventsClickListener
+class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEventsClickListener
 {
     @Inject
     lateinit var interactor : EventsInteractor
@@ -70,7 +69,7 @@ class EventListViewActivity : MyBaseActivity(), IEventsController.View, IEventsC
             parentView!!.event_progress_bar.visibility = View.VISIBLE
             presenter!!.getEventsList(categoryId)
         } else
-            showSnackBarFromResource(parentView!!.eventsListContainer, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE)
+            commonMethod.showSnackBarFromResource(parentView!!.eventsListContainer, R.string.no_internet_connection, this)
     }
 
     private fun initRecyclerView()
@@ -126,7 +125,7 @@ class EventListViewActivity : MyBaseActivity(), IEventsController.View, IEventsC
 
     override fun getError(msg: String) {
         if(isAttached)
-            showSnackBarFromString(parentView!!.eventsListContainer, msg)
+            commonMethod.showSnackBarFromString(parentView!!.eventsListContainer, msg)
     }
 
     override fun onDestroy()

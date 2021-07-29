@@ -34,6 +34,11 @@ class CommonMethod
         Snackbar.make(root, context.resources.getString(resourceMsg), Snackbar.LENGTH_LONG).show()
     }
 
+    fun showSnackBarFromString(root : View, message : String)
+    {
+        Snackbar.make(root, message, Snackbar.LENGTH_INDEFINITE).show()
+    }
+
     fun checkPatternValidation(pattern: String, field: String): Boolean {
         val ptn = Pattern.compile(pattern)
         val matcher = ptn.matcher(field)
