@@ -8,4 +8,15 @@
     <string name="loading">جاري التسجيل</string>
     <string name="no_data_found">لا يوجد بيانات</string>
     <string name="no_internet_connection">لا يوجد اتصال بالانترنت</string>
+    <string name="full_name">الأسم بالكامل</string>
+    <string name="national_id">الرقم القومي</string>
+    <string name="birthday_date">تاريخ الميلاد</string>
+    <string name="gender">النوع</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثي</string>
+    <string name="submit">تاكيد الحجز</string>
+    <string name="cancel">اغلاق</string>
+    <string name="book">حجز</string>
+    <string name="from">من</string>
+    <string name="to">الي</string>
 </resources>

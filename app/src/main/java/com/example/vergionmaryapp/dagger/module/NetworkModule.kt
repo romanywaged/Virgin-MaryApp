@@ -1,6 +1,8 @@
 package com.example.vergionmaryapp.dagger.module
 
+import com.example.vergionmaryapp.api.BookingAPI
 import com.example.vergionmaryapp.api.CategoryAPI
+import com.example.vergionmaryapp.booking.bookEvent.BookingInteractor
 import com.example.vergionmaryapp.booking.showEvents.EventsInteractor
 import com.example.vergionmaryapp.utils.BASE_URL
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -15,11 +17,13 @@ import java.util.concurrent.TimeUnit
 
 
 @Module
-class NetworkModule {
+class NetworkModule
+{
     private var okHttpClient: OkHttpClient? = null
     private var retrofitInstance: Retrofit? = null
 
     private var eventsApi : CategoryAPI ?= null
+    private var bookingApi : BookingAPI ?= null
 
 
     //----------------------------- Basic Providers ----------------------
@@ -57,7 +61,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideLoginApi() : CategoryAPI
+    fun provideCategoryApi() : CategoryAPI
     {
         if(eventsApi == null)
             eventsApi = provideRetrofit().create(CategoryAPI::class.java)
@@ -66,11 +70,26 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideLoginInteractor() : EventsInteractor
+    fun provideEventsInteractor() : EventsInteractor
     {
-        return EventsInteractor(provideLoginApi())
+        return EventsInteractor(provideCategoryApi())
     }
 
+    @Provides
+    @Singleton
+    fun provideBookingApi() : BookingAPI
+    {
+        if(bookingApi == null)
+            bookingApi = provideRetrofit().create(BookingAPI::class.java)
+        return bookingApi!!
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookingInteractor() : BookingInteractor
+    {
+        return BookingInteractor(provideBookingApi())
+    }
 
 }
 

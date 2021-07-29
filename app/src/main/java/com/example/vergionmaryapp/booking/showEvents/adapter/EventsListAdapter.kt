@@ -1,18 +1,24 @@
 package com.example.vergionmaryapp.booking.showEvents.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vergionmaryapp.R
 import com.example.vergionmaryapp.models.booking.EventModule
+import com.example.vergionmaryapp.utils.CommonMethod
 import kotlinx.android.synthetic.main.item_event_list.view.*
 
 
 class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
-                        private var listener: IEventsClickListener)
+                        private var listener: IEventsClickListener,
+                        private var context : Context)
     : RecyclerView.Adapter<EventsListAdapter.EventHolder>()
 {
+    private var fade: Animation? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder
     {
@@ -29,10 +35,20 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
 
     override fun onBindViewHolder(holder: EventHolder, position: Int)
     {
-        val eventObject = eventsList[position]
+        fade = AnimationUtils.loadAnimation(context, R.anim.scale_animition)
+        holder.myCardView.animation = fade
 
-        holder.dateNameTv.text = eventObject.eventDate
-        holder.bodyDesTv.text = eventObject.eventName
+        val eventObject = eventsList[position]
+        val commonMethod = CommonMethod()
+        var eventDate = ""
+
+        if(eventObject.eventDate != null && eventObject.eventDate != "00:00:00")
+            eventDate = eventObject.eventDate?.let { commonMethod.separateString(it) }.toString()
+
+        holder.eventTitleTv.text = eventObject.eventName
+        holder.eventDateTv.text = eventDate
+        holder.eventDayTv.text = commonMethod.getDayNameFromDate(eventDate!!)
+
         holder.myCardView.setOnClickListener {
             eventObject.id?.let { listener.onItemClicked(it) }
         }
@@ -40,9 +56,9 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
 
     inner class EventHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
     {
-        val dateNameTv = itemView.dateNameTv!!
-        val dayNameTv = itemView.dayNameTv!!
-        val bodyDesTv = itemView.bodyDesTv!!
+        val eventDateTv = itemView.eventDateTv!!
+        val eventDayTv = itemView.eventDayTv!!
+        val eventTitleTv = itemView.eventTitleTv!!
         val myCardView = itemView.iteme_event_linear!!
     }
 }

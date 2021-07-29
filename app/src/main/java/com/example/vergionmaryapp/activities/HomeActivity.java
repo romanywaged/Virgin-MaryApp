@@ -3,11 +3,13 @@ package com.example.vergionmaryapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.vergionmaryapp.R;
 import com.example.vergionmaryapp.booking.showEvents.EventListViewActivity;
 import com.example.vergionmaryapp.models.SetUpDatabase;
 import com.example.vergionmaryapp.models.SharedPrefrenceModel;
+import com.example.vergionmaryapp.utils.CommonMethod;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,13 +46,13 @@ public class HomeActivity extends AppCompatActivity
     @OnClick(R.id.bookAodasCardView)
     public void onClickBookAodas()
     {
-        openElReservationEventsView(1);
+        openElReservationEventsView(1, getString(R.string.booking_aodas));
     }
 
     @OnClick(R.id.bookNahdaCardView)
     public void onClickBookNahda()
     {
-        openElReservationEventsView(2);
+        openElReservationEventsView(2, getString(R.string.booking_nahda));
     }
 
     @OnClick(R.id.aboutCardView)
@@ -58,10 +60,11 @@ public class HomeActivity extends AppCompatActivity
     {
     }
 
-    private void openElReservationEventsView(int categoryId)
+    private void openElReservationEventsView(int categoryId, String eventName)
     {
         Intent intent = new Intent(HomeActivity.this, EventListViewActivity.class);
-        intent.putExtra("actionCategoryId", categoryId);
+        intent.putExtra("eventCategoryId", categoryId);
+        intent.putExtra("eventTypeName", eventName);
         startActivity(intent);
     }
 

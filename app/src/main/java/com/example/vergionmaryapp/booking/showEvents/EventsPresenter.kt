@@ -32,7 +32,7 @@ class EventsPresenter(private var interactor : EventsInteractor, private var ioS
                             } else
                                 view?.emptyList(true)
                         else
-                            view?.getError("Server Error")
+                            view?.getError("لقد حدث خطا في الانترنت")
                     }
 
                     override fun onComplete() {
@@ -52,7 +52,8 @@ class EventsPresenter(private var interactor : EventsInteractor, private var ioS
             when (e.code())
             {
                 400 ->view?.getError("There is an error")
-                500 ->view?.getError("Server Error")
+                500 ->view?.getError("لقد حدث خطا في الانترنت")
+                else -> view?.getError("لقد حدث خطا في الانترنت")
             }
         else
             view?.getError("Your internet is unstable")

@@ -28,4 +28,33 @@
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
+
+    <style name="edit_text_sty">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/my_edit_text_height</item>
+        <item name="android:layout_marginStart">@dimen/add_mr_st_end</item>
+        <item name="android:layout_marginEnd">@dimen/add_mr_st_end</item>
+        <item name="android:layout_marginTop">@dimen/add_mr_top</item>
+        <item name="android:paddingStart">7dp</item>
+        <item name="android:paddingEnd">7dp</item>
+        <item name="android:background">@drawable/bg_white_with_gray_border</item>
+        <item name="android:textColorHint">@color/bold_gray_text</item>
+        <item name="android:textColor">@color/semi_black</item>
+        <item name="android:textSize">@dimen/add_text_size</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="bold_home_text_13">
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
+    <style name="gray_text">
+        <item name="android:textColor">@color/light_red</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
 </resources>

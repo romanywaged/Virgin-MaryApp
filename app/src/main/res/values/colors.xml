@@ -17,4 +17,17 @@
     <color name="pink">#ff4081</color>
     <color name="green">#00bfa5</color>
     <color name="back_popup">#2f333f</color>
+
+    <color name="edit_text_bg_color">#f6f6f6</color>
+    <color name="edit_text_bg_border">#d6d6d6</color>
+    <color name="bold_gray_text">#898a8f</color>
+    <color name="semi_black">#3f3f3f</color>
+    <color name="light_red">#f59585</color>
+    <color name="red">#F82A07</color>
+    <color name="spinner_hint">#adb3a9</color>
+    <color name="light_black">#494949</color>
+    <color name="view_gray">#809ca299</color>
+    <color name="hint_text">#9CA299</color>
+    <color name="trans_color">#80D3E1E1</color>
+
 </resources>

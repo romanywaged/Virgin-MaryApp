@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".booking.bookEvent.EventBookingActivity"></activity>
+
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +32,13 @@
             android:theme="@style/AddChoirTheme" />
         <activity
             android:name=".booking.showEvents.EventListViewActivity"
+            android:theme="@style/AddChoirTheme"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.BookingActivity" />
+
+        <activity android:name=".booking.bookEvent.BookingEventActivity"
+            android:theme="@style/AddChoirTheme"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.WordsActivity"
             android:theme="@style/TarnemaStyle" />

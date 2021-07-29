@@ -1,65 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="190dp"
-    android:layout_height="180dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/iteme_event_linear"
-    android:background="@drawable/bg_white_with_blue_border"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/row_data"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@color/tarns_blue"
-        android:orientation="horizontal"
-        android:weightSum="4">
+        android:layout_height="120dp"
+        android:background="@drawable/bg_filter_shado_white_left_red"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:paddingEnd="10dp">
 
         <TextView
-            android:id="@+id/dateNameTv"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_weight="2.3"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="2021-08-22"
-            android:gravity="center"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="fill_vertical"
+            android:rotation="-90"
+            android:text="حجز"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
 
-        <View
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/eventTitleTv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".4"/>
+            android:layout_marginStart="35dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:text="هضة"
+            android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/dayNameTv"
-            android:layout_width="0dp"
-            android:layout_height="35dp"
-            android:layout_weight="1.3"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="الاحد"
-            android:gravity="center"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp" />
+        <LinearLayout
+            android:id="@+id/eventDateLin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/eventTitleTv"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/eventDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:text="2021-08-22"
+                android:gravity="center" />
 
+            <TextView
+                android:id="@+id/eventDayTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:text="الاحد"
+                android:gravity="center" />
 
-    <TextView
-        android:id="@+id/bodyDesTv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textColor="@color/colorPrimary"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:text="القداس الاول"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/deb_time_lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginBottom="2dp"
+            android:layout_below="@+id/eventDateLin"
+            android:orientation="vertical">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/to_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/bold_home_text_13"
+                android:text="10:00 PM"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                style="@style/gray_text" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/deb_time_lin"
+            android:src="@drawable/ic_from_to_gray"
+            android:layout_below="@+id/eventDateLin"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventDateLin"
+            android:layout_toEndOf="@+id/icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/from_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/bold_home_text_13"
+                android:text="06:00 PM"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/from"
+                style="@style/gray_text" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

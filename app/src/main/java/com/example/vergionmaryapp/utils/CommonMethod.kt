@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 @Suppress("DEPRECATION")
@@ -24,6 +26,20 @@ class CommonMethod
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
+    fun getDayNameFromDate(inputDate : String) : String
+    {
+        val inFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ar"))
+        val date: Date = inFormat.parse(inputDate)
+        val outFormat = SimpleDateFormat("EEEE", Locale("ar"))
+        return outFormat.format(date)
+    }
+
+    fun separateString(dateStr : String) : String
+    {
+        val parts = dateStr.split("T")
+        return parts[0]
+    }
+
     fun showSnackBarFromResourceInfinity(root : View, resourceMsg : Int, context: Context)
     {
         Snackbar.make(root, context.resources.getString(resourceMsg), Snackbar.LENGTH_INDEFINITE).show()
@@ -36,7 +52,7 @@ class CommonMethod
 
     fun showSnackBarFromString(root : View, message : String)
     {
-        Snackbar.make(root, message, Snackbar.LENGTH_INDEFINITE).show()
+        Snackbar.make(root, message, Snackbar.LENGTH_LONG).show()
     }
 
     fun checkPatternValidation(pattern: String, field: String): Boolean {

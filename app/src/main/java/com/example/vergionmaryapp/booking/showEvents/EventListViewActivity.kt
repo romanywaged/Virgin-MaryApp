@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
-import com.example.vergionmaryapp.booking.bookEvent.EventBookingActivity
+import com.example.vergionmaryapp.booking.bookEvent.BookingEventActivity
 import com.example.vergionmaryapp.booking.showEvents.adapter.EventsListAdapter
 import com.example.vergionmaryapp.booking.showEvents.adapter.IEventsClickListener
 import com.example.vergionmaryapp.models.booking.EventModule
@@ -20,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_reserve_event.*
 import java.lang.ref.WeakReference
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEventsClickListener
@@ -37,7 +38,10 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     private val commonMethod = CommonMethod()
 
     private var isAttached = false
+
     private var categoryId = 0
+    private var pageTitle = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -49,7 +53,15 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
         shared = MyApplicationSharedPreference(WeakReference<Context>(this))
 
         if(intent != null)
-            categoryId = intent.getIntExtra("actionCategoryId", 0)
+        {
+            categoryId = intent.getIntExtra("eventCategoryId", 0)
+            pageTitle = intent.getStringExtra("eventTypeName")!!
+        }
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+
+        supportActionBar!!.title = pageTitle
     }
 
     override fun onStart()
@@ -91,7 +103,7 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
         mLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         events_list.layoutManager = mLayoutManager
 
-        mAdapter = EventsListAdapter(myEventsList, this)
+        mAdapter = EventsListAdapter(myEventsList, this, this)
         events_list.adapter = mAdapter
     }
 
@@ -129,16 +141,27 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
             commonMethod.showSnackBarFromString(eventsListContainer, msg)
     }
 
+    override fun onItemClicked(eventId: Int) {
+        intent = Intent(this, BookingEventActivity::class.java)
+        intent.putExtra("selectedEventId",eventId)
+        intent.putExtra("selectedEventName", pageTitle)
+        startActivity(intent)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onDestroy()
     {
         super.onDestroy()
         presenter!!.detachedView()
         isAttached = false
-    }
-
-    override fun onItemClicked(eventId: Int) {
-        intent = Intent(this,EventBookingActivity::class.java)
-        intent.putExtra("ID",eventId)
-        startActivity(intent)
     }
 }

@@ -1,5 +1,6 @@
 package  com.example.vergionmaryapp.dagger.component
 
+import com.example.vergionmaryapp.booking.bookEvent.BookingEventActivity
 import com.example.vergionmaryapp.booking.showEvents.EventListViewActivity
 import com.example.vergionmaryapp.dagger.module.AppModule
 import com.example.vergionmaryapp.dagger.module.NetworkModule
@@ -15,7 +16,9 @@ import dagger.Component
 interface NetworkComponent
 {
 
-//Display EventsByCategoryId Module
-    fun inject(elNahdaActivity: EventListViewActivity)
+//Booking Module
+    fun inject(eventListViewActivity : EventListViewActivity)
+
+    fun inject(bookingEventActivity: BookingEventActivity)
 
 }
