@@ -36,6 +36,7 @@
         <EditText
             android:id="@+id/birthdayDateET"
             style="@style/edit_text_sty"
+            android:focusable="false"
             android:hint="@string/birthday_date" />
 
         <RelativeLayout
