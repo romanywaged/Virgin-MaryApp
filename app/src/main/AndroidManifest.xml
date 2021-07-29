@@ -20,6 +20,10 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
 
+        <activity android:name=".activities.AboutActivity"
+            android:theme="@style/TarnemaStyle"/>
+
+
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
