@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.StringBuilderPrinter
 import android.view.MenuItem
@@ -84,6 +85,13 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
         //Romany
         getBirthday()
+
+    }
+
+    private fun moveConfirmation() {
+           var intent:Intent = Intent(this,BookingConfirmationActivity::class.java)
+            startActivity(intent)
+
     }
 
     override fun onStart()
@@ -103,10 +111,13 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     private fun initView()
     {
+
+        birthdayDateET.inputType = 0
         handleGenderSpinner(genderSpinner)
 
         confirmBookingBtn.setOnClickListener {
            // validateInputFields()
+
 
             val requestBookingBody = RequestBookingBody()
             requestBookingBody.eventDayId = eventId
@@ -126,8 +137,9 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
             presenter!!.submitBookingObject(requestBookingBody)
 
+            moveConfirmation()
 
-            birthdayDateET.inputType = 0
+
         }
 
         cancelBtn.setOnClickListener {
