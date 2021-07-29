@@ -2,6 +2,7 @@ package com.example.vergionmaryapp.booking.showEvents
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
+import com.example.vergionmaryapp.booking.bookEvent.EventBookingActivity
 import com.example.vergionmaryapp.booking.showEvents.adapter.EventsListAdapter
 import com.example.vergionmaryapp.booking.showEvents.adapter.IEventsClickListener
 import com.example.vergionmaryapp.models.booking.EventModule
@@ -16,7 +18,7 @@ import com.example.vergionmaryapp.utils.CommonMethod
 import com.example.vergionmaryapp.utils.MyApplicationSharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_el_nahda.view.*
+import kotlinx.android.synthetic.main.activity_reserve_event.*
 import java.lang.ref.WeakReference
 import java.util.ArrayList
 import javax.inject.Inject
@@ -27,7 +29,6 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     lateinit var interactor : EventsInteractor
 
     var presenter : EventsPresenter?= null
-    private var parentView : View ?= null
     private lateinit var shared : MyApplicationSharedPreference
 
     private lateinit var mAdapter: EventsListAdapter
@@ -41,7 +42,7 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_el_nahda)
+        setContentView(R.layout.activity_reserve_event)
 
         (application as MyFreeApplication).networkComponent?.inject(this)
         presenter = EventsPresenter(interactor, Schedulers.io(), AndroidSchedulers.mainThread())
@@ -66,16 +67,16 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
         if(commonMethod.checkNetworkConnection(this))
         {
             myEventsList.clear()
-            parentView!!.event_progress_bar.visibility = View.VISIBLE
+            event_progress_bar.visibility = View.VISIBLE
             presenter!!.getEventsList(categoryId)
         } else
-            commonMethod.showSnackBarFromResource(parentView!!.eventsListContainer, R.string.no_internet_connection, this)
+            commonMethod.showSnackBarFromResource(eventsListContainer, R.string.no_internet_connection, this)
     }
 
     private fun initRecyclerView()
     {
         initAdapter()
-        parentView!!.events_list.addOnScrollListener(object: RecyclerView.OnScrollListener()
+        events_list.addOnScrollListener(object: RecyclerView.OnScrollListener()
         {
             @SuppressLint("LongLogTag")
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int)
@@ -88,22 +89,22 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     private fun initAdapter()
     {
         mLayoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        parentView!!.events_list.layoutManager = mLayoutManager
+        events_list.layoutManager = mLayoutManager
 
         mAdapter = EventsListAdapter(myEventsList, this)
-        parentView!!.events_list.adapter = mAdapter
+        events_list.adapter = mAdapter
     }
 
     override fun showLoading()
     {
         if(isAttached)
-            parentView!!.event_progress_bar.visibility = View.VISIBLE
+            event_progress_bar.visibility = View.VISIBLE
     }
 
     override fun hideLoading()
     {
         if(isAttached)
-            parentView!!.event_progress_bar.visibility = View.GONE
+            event_progress_bar.visibility = View.GONE
     }
 
     override fun getEvents(eventsList: List<EventModule>)
@@ -118,14 +119,14 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     override fun emptyList(isEmpty : Boolean)
     {
         if(isEmpty)
-            parentView!!.emptyList.visibility = View.VISIBLE
+            emptyList.visibility = View.VISIBLE
         else
-            parentView!!.emptyList.visibility = View.GONE
+            emptyList.visibility = View.GONE
     }
 
     override fun getError(msg: String) {
         if(isAttached)
-            commonMethod.showSnackBarFromString(parentView!!.eventsListContainer, msg)
+            commonMethod.showSnackBarFromString(eventsListContainer, msg)
     }
 
     override fun onDestroy()
@@ -136,5 +137,8 @@ class EventListViewActivity : AppCompatActivity(), IEventsController.View, IEven
     }
 
     override fun onItemClicked(eventId: Int) {
+        intent = Intent(this,EventBookingActivity::class.java)
+        intent.putExtra("ID",eventId)
+        startActivity(intent)
     }
 }

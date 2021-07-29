@@ -1,35 +1,19 @@
 package com.example.vergionmaryapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import com.example.vergionmaryapp.R;
 import com.example.vergionmaryapp.booking.showEvents.EventListViewActivity;
 import com.example.vergionmaryapp.models.SetUpDatabase;
 import com.example.vergionmaryapp.models.SharedPrefrenceModel;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeActivity extends AppCompatActivity
 {
-    @BindView(R.id.praise_lin)
-    LinearLayout Hymens;
-
-    @BindView(R.id.book_aodas_btn)
-    CardView bookAodas;
-
-    @BindView(R.id.book_nahda_btn)
-    CardView bookNahda;
-
-    @BindView(R.id.about_dev_btn)
-    Button About;
-
     SharedPrefrenceModel sharedPrefrenceModel;
 
     @Override
@@ -48,33 +32,37 @@ public class HomeActivity extends AppCompatActivity
             database.setup();
             sharedPrefrenceModel.SaveShared(true);
         }
-
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Hymens.setOnClickListener(v ->
-        {
-            Intent intent = new Intent(HomeActivity.this, HymensActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        openEventsListView(bookAodas, 1);
-        openEventsListView(bookNahda, 2);
-    }
-
-    private void openEventsListView(CardView bookBtn, int categoryId)
+    @OnClick(R.id.taranimCardView)
+    public void openHymensActivity()
     {
-        bookBtn.setOnClickListener(v ->
-        {
-            Intent intent = new Intent(HomeActivity.this, EventListViewActivity.class);
-            intent.putExtra("actionCategoryId", categoryId);
-            startActivity(intent);
-            finish();
-        });
+        Intent intent = new Intent(HomeActivity.this, HymensActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.bookAodasCardView)
+    public void onClickBookAodas()
+    {
+        openElReservationEventsView(1);
+    }
+
+    @OnClick(R.id.bookNahdaCardView)
+    public void onClickBookNahda()
+    {
+        openElReservationEventsView(2);
+    }
+
+    @OnClick(R.id.aboutCardView)
+    public void openAboutView()
+    {
+    }
+
+    private void openElReservationEventsView(int categoryId)
+    {
+        Intent intent = new Intent(HomeActivity.this, EventListViewActivity.class);
+        intent.putExtra("actionCategoryId", categoryId);
+        startActivity(intent);
     }
 
 

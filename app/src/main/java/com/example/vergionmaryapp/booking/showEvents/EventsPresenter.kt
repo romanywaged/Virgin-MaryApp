@@ -24,15 +24,15 @@ class EventsPresenter(private var interactor : EventsInteractor, private var ioS
                     override fun onNext(eventsResponse: EventsResponse) {
                         view?.hideLoading()
 
-//                        if(doctorslist.data != null)
-//                            if(!doctorslist.data!!.isNullOrEmpty())
-//                            {
-//                                view?.getDoctors(doctorslist.data!!)
-//                                view?.emptyList(false)
-//                            } else
-//                                view?.emptyList(true)
-//                        else
-//                            view?.getError("Server Error")
+                        if(eventsResponse.eventsList != null)
+                            if(!eventsResponse.eventsList!!.isNullOrEmpty())
+                            {
+                                view?.getEvents(eventsResponse.eventsList!!)
+                                view?.emptyList(false)
+                            } else
+                                view?.emptyList(true)
+                        else
+                            view?.getError("Server Error")
                     }
 
                     override fun onComplete() {

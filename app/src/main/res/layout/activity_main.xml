@@ -15,210 +15,180 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black">
+                android:src="@drawable/vergionmary"
+                android:layout_height="230dp"/>
 
-                <ImageView
-                    android:id="@+id/homePager"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="12dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/taranimCardView"
                     android:layout_width="match_parent"
-                    android:src="@drawable/vergionmary"
-                    android:layout_height="230dp"/>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="25dp"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/praise_icon"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/icon" />
+
+                        <TextView
+                            android:id="@+id/tittle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Hymens"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:transitionName="SharedName"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_below="@id/homePager"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2.7">
 
-                    <LinearLayout
-                        android:id="@+id/praise_lin"
-                        android:layout_width="match_parent"
-                        android:layout_height="135dp"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/bookAodasCardView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.3"
+                        android:layout_marginEnd="5dp"
+                        android:orientation="vertical">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingTop="25dp"
+                            android:paddingBottom="25dp"
+                            android:layout_gravity="center">
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:src="@drawable/booking"
+                                android:layout_gravity="center" />
 
-                                <Button
-                                    android:id="@+id/praise_btn"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@android:color/transparent"/>
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/praise_icon"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/icon"
-                                    android:layout_centerInParent="true"/>
-                                <TextView
-                                    android:id="@+id/tittle"
-                                    android:transitionName="SharedName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/Hymens"
-                                    android:textSize="15dp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/black"
-                                    android:layout_below="@id/praise_icon"
-                                    android:layout_centerHorizontal="true" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lin2"
-                        android:layout_width="match_parent"
-                        android:layout_height="135dp"
-                        android:layout_marginTop="15dp"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp"
-                        android:weightSum="2.7">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/book_aodas_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.3"
-                            android:layout_marginEnd="5dp"
-                            android:orientation="vertical">
-
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:layout_gravity="center"
-                                android:gravity="center">
+                                android:layout_height="wrap_content"
+                                android:text="@string/booking_aodas"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:transitionName="SharedName"
+                                android:textColor="@color/black" />
 
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="55dp"
-                                    android:layout_height="55dp"
-                                    android:src="@drawable/booking"
-                                    android:layout_gravity="center" />
+                        </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/booking_aodas"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"
-                                    android:transitionName="SharedName"
-                                    android:textColor="@color/black" />
+                    </androidx.cardview.widget.CardView>
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".1"/>
 
-                        <View
-                            android:layout_width="0dp"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/bookNahdaCardView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.3"
+                        android:layout_marginEnd="5dp"
+                        android:layout_gravity="end"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight=".1"/>
+                            android:orientation="vertical"
+                            android:paddingTop="25dp"
+                            android:paddingBottom="25dp"
+                            android:layout_gravity="center">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/book_nahda_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.3"
-                            android:layout_marginEnd="5dp"
-                            android:layout_gravity="end"
-                            android:orientation="vertical">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:src="@drawable/booking"
+                                android:layout_gravity="center" />
 
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:layout_gravity="center"
-                                android:gravity="center">
+                                android:layout_height="wrap_content"
+                                android:text="@string/booking_nahda"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:transitionName="SharedName"
+                                android:textColor="@color/black" />
 
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="55dp"
-                                    android:layout_height="55dp"
-                                    android:src="@drawable/booking"
-                                    android:layout_gravity="center" />
+                        </LinearLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/booking_nahda"
-                                    android:textSize="15sp"
-                                    android:textStyle="bold"
-                                    android:transitionName="SharedName"
-                                    android:textColor="@color/black" />
+                    </androidx.cardview.widget.CardView>
 
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lin3"
-                        android:layout_width="match_parent"
-                        android:layout_height="135dp"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_gravity="center">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:orientation="vertical">
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <Button
-                                    android:id="@+id/about_dev_btn"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@android:color/transparent"/>
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/about_dev_icon"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/about"
-                                    android:layout_centerInParent="true"/>
-                                <TextView
-                                    android:id="@+id/tittle5"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/about"
-                                    android:textSize="15dp"
-                                    android:textStyle="bold"
-                                    android:transitionName="SharedName"
-                                    android:textColor="@color/black"
-                                    android:layout_below="@id/about_dev_icon"
-                                    android:layout_centerHorizontal="true"
-                                    />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
                 </LinearLayout>
-            </RelativeLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/aboutCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="25dp"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/about" />
+
+                        <TextView
+                            android:id="@+id/tittle5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:transitionName="SharedName"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

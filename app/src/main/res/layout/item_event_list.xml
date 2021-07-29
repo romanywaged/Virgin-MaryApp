@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="190dp"
     android:layout_height="180dp"
+    android:id="@+id/iteme_event_linear"
     android:background="@drawable/bg_white_with_blue_border"
     android:orientation="vertical">
 

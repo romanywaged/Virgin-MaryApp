@@ -16,5 +16,5 @@ class EventsResponse : Serializable
 
     @SerializedName("response")
     @Expose
-    var response: List<EventModule>? = null
+    var eventsList: List<EventModule>? = null
 }

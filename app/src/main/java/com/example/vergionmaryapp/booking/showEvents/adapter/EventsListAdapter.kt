@@ -33,6 +33,9 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
 
         holder.dateNameTv.text = eventObject.eventDate
         holder.bodyDesTv.text = eventObject.eventName
+        holder.myCardView.setOnClickListener {
+            eventObject.id?.let { listener.onItemClicked(it) }
+        }
     }
 
     inner class EventHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
@@ -40,5 +43,6 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
         val dateNameTv = itemView.dateNameTv!!
         val dayNameTv = itemView.dayNameTv!!
         val bodyDesTv = itemView.bodyDesTv!!
+        val myCardView = itemView.iteme_event_linear!!
     }
 }

@@ -71,11 +71,12 @@ dependencies {
 
     //ButterKnife
     implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+    kapt 'com.jakewharton:butterknife-compiler:10.2.3'
 
     // room database
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
     implementation 'com.android.support:multidex:1.0.3'
 
