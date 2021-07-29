@@ -3,6 +3,7 @@ package com.example.vergionmaryapp.booking.bookEvent
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -69,7 +70,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         super.onStart()
         presenter!!.attachedView(this)
         isAttached = true
-
         initView()
     }
 
@@ -83,26 +83,10 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
     {
         handleGenderSpinner(genderSpinner)
 
+        //"29406090102629"
+
         confirmBookingBtn.setOnClickListener {
-           // validateInputFields()
-
-            val requestBookingBody = RequestBookingBody()
-            requestBookingBody.eventDayId = eventId
-            requestBookingBody.noofTickets = 1
-            requestBookingBody.reservationCode = ""
-            requestBookingBody.secretPin = ""
-            requestBookingBody.requesterNationalId = "29406090102629"
-
-            val userObject = UserObject()
-            val userList = ArrayList<UserObject>()
-
-            userObject.userFullName = "Marina"
-            userObject.userNationalId = "29406090102629"
-            userObject.userGenderId = 1
-            userList.add(userObject)
-            requestBookingBody.userObject = userList
-
-            presenter!!.submitBookingObject(requestBookingBody)
+            validateInputFields()
         }
 
         cancelBtn.setOnClickListener {
@@ -116,7 +100,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         dayList.add("ذكر")
         dayList.add("انثي")
 
-        val spinnerArrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dayList)
+        val spinnerArrayAdapter = ArrayAdapter<String>(this, R.layout.si_items_gender, dayList)
 
         if(isUpdate)
             mySpinner.adapter = spinnerArrayAdapter
@@ -141,17 +125,17 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         }
     }
 
-
     private fun validateInputFields()
     {
         val fullName = fullNameET.text.toString().trim()
         val nationalId = nationalIdET.text.toString().trim()
         val birthdayDate = birthdayDateET.text.toString().trim()
+        val birthdayWithoutSpace = ""
 
         if(fullName.isNotBlank())
             if(nationalId.isNotBlank())
                 if(birthdayDate.isNotBlank())
-                    if(userGender != 0)
+                    if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
                     {
                         val requestBookingBody = RequestBookingBody()
                         requestBookingBody.eventDayId = eventId
@@ -170,18 +154,15 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
                         requestBookingBody.userObject = userList
 
                         presenter!!.submitBookingObject(requestBookingBody)
-                    }
 
-//                    else
-//                        view!!.appointmentEmpty()
-//                else
-//                    view!!.addressEmpty()
-//            else
-//                view!!.specialityEmpty()
-//
-//        else
-//            view!!.nameEmpty()
-
+                    }else
+                        commonMethod.showSnackBarFromResource(eventsListContainer, R.string.data_error, this)
+                else
+                    commonMethod.showSnackBarFromResource(eventsListContainer, R.string.birthday_error, this)
+            else
+                commonMethod.showSnackBarFromResource(eventsListContainer, R.string.national_id_error, this)
+        else
+            commonMethod.showSnackBarFromResource(eventsListContainer, R.string.name_error, this)
     }
 
     override fun submitSuccess(response: BookingResponseModule)

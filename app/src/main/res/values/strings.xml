@@ -22,4 +22,10 @@
     <string name="book">حجز</string>
     <string name="from">من</string>
     <string name="to">الي</string>
+
+    <string name="name_error">من فضلك ادخل الاسم بالكامل</string>
+    <string name="national_id_error">من فضلك ادخل الرقم القومي</string>
+    <string name="birthday_error">من فضلك ادخل تاريخ الميلاد</string>
+    <string name="data_error">من فضلك ادخل البيانات الصحيحة</string>
+
 </resources>

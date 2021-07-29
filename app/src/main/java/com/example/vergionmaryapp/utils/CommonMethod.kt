@@ -61,5 +61,16 @@ class CommonMethod
         return matcher.matches()
     }
 
+    fun validateNationalID(nationalId : String, birthdayStr : String) : Boolean
+    {
+        if(nationalId.length == 14)
+        {
+            val birthdayFromID = nationalId.substring(1,6)
+
+            return birthdayFromID == birthdayStr
+        }
+        return false
+    }
+
 
 }
