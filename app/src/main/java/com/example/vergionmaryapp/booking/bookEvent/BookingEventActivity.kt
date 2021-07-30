@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -75,6 +76,19 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
+
+
+
+
+        //Romany
+        getBirthday()
+
+    }
+
+    private fun moveConfirmation() {
+           var intent:Intent = Intent(this,BookingConfirmationActivity::class.java)
+            startActivity(intent)
+
     }
 
     override fun onStart()
@@ -182,17 +196,20 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.name_error, this)
     }
 
+    //Romany
+
     private fun getBirthday()
     {
-        birthdayDateET.setOnClickListener {
+        birthdayDateET.setOnClickListener({
             getDateCalender()
             DatePickerDialog(this, this, year,month,day).show()
-        }
+        })
     }
+
 
     private fun getDateCalender()
     {
-        val calender:Calendar = Calendar.getInstance()
+        var calender:Calendar = Calendar.getInstance()
         day = calender.get(Calendar.DAY_OF_MONTH)
         month = calender.get(Calendar.MONTH)
         year = calender.get(Calendar.YEAR)
@@ -200,12 +217,21 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     @SuppressLint("SetTextI18n")
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+
         savedDay = dayOfMonth
-        savedMonth = month +1
+        savedMonth = month
         savedYear = year
 
-        birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
-        birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+        if (savedDay<10 || savedMonth < 10)
+        {
+            var strDay:String = "0" + "$savedDay"
+            var strMonth:String = "0" + "$savedMonth"
+            birthdayDateET.setText("$savedYear-" + strMonth + "-" + strDay)
+        }
+        else
+        {
+            birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+        }
     }
 
     override fun submitSuccess(response: BookingResponseModule)
