@@ -25,14 +25,23 @@ class BookingPresenter (private var interactor : BookingInteractor, private var 
                     {
                         view?.hideLoading()
 
-                        if(bookingResponse.message!!.contains("تم تاكيد الحجز بكود"))
+                        if(bookingResponse.message != null)
                         {
-                            val ticketNumber = bookingResponse.message!!.replace("تم تاكيد الحجز بكود","")
-                                    .replace(", من فضلك احتفظ بالكود", "")
-                            view?.submitSuccess(ticketNumber)
+                            if(bookingResponse.message!!.contains("تم تاكيد الحجز بكود"))
+                            {
+                                val ticketNumber = bookingResponse.message!!.replace("تم تاكيد الحجز بكود","")
+                                        .replace(", من فضلك احتفظ بالكود", "")
+                                view?.submitSuccess(ticketNumber)
 
-                        } else
-                            view?.getError(bookingResponse.message!!)
+                            } else
+                                view?.getError(bookingResponse.message!!)
+                        }
+
+                        if(!bookingResponse.errorsObject.isNullOrEmpty())
+                        {
+                            view?.getError(bookingResponse.errorsObject!![0])
+                        }
+
                     }
 
                     override fun onComplete() {
