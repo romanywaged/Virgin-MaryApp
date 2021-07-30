@@ -19,18 +19,20 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".booking.bookEvent.BookingConfirmationActivity"
-            android:theme="@style/TarnemaStyle"
-            ></activity>
-        <activity
-            android:name=".activities.AboutActivity"
-            android:theme="@style/TarnemaStyle" />
-        <activity android:name=".activities.HomeActivity">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".booking.bookEvent.BookingConfirmationActivity"
+            android:theme="@style/TarnemaStyle" />
+        <activity
+            android:name=".activities.AboutActivity"
+            android:theme="@style/TarnemaStyle" />
+        <activity android:name=".activities.HomeActivity">
         </activity>
         <activity
             android:name=".activities.HymensActivity"
