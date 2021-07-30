@@ -24,7 +24,6 @@ import com.example.vergionmaryapp.utils.ProgressDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_booking_event.*
-import kotlinx.android.synthetic.main.activity_reserve_event.*
 import java.lang.ref.WeakReference
 import java.util.*
 import javax.inject.Inject
@@ -44,19 +43,18 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     private var isAttached = false
     private var isUpdate = false
 
+    private var pageTitle = ""
+    private var birthdayWithoutSpace = ""
     private var eventId = 0
     private var userGender = 0
-    private var pageTitle = ""
 
-//Romany
     private var day = 0
-    private var Month = 0
-    private var Year = 0
-
-
+    private var month = 0
+    private var year = 0
     private var savedDay = 0
     private var savedMonth = 0
     private var savedYear = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -77,12 +75,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
-
-
-
-
-        //Romany
-        getBirthday()
     }
 
     override fun onStart()
@@ -104,32 +96,13 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     private fun initView()
     {
         handleGenderSpinner(genderSpinner)
+        getBirthday()
+        birthdayDateET.inputType = 0
 
         //"29406090102629"
 
         confirmBookingBtn.setOnClickListener {
-           // validateInputFields()
-
-            val requestBookingBody = RequestBookingBody()
-            requestBookingBody.eventDayId = eventId
-            requestBookingBody.noofTickets = 1
-            requestBookingBody.reservationCode = ""
-            requestBookingBody.secretPin = ""
-            requestBookingBody.requesterNationalId = "29406090102629"
-
-            val userObject = UserObject()
-            val userList = ArrayList<UserObject>()
-
-            userObject.userFullName = "Marina"
-            userObject.userNationalId = "29406090102629"
-            userObject.userGenderId = 1
-            userList.add(userObject)
-            requestBookingBody.userObject = userList
-
-            presenter!!.submitBookingObject(requestBookingBody)
-
-
-            birthdayDateET.inputType = 0
+            validateInputFields()
         }
 
         cancelBtn.setOnClickListener {
@@ -200,13 +173,39 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
                         presenter!!.submitBookingObject(requestBookingBody)
 
                     }else
-                        commonMethod.showSnackBarFromResource(eventsListContainer, R.string.data_error, this)
+                        commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
                 else
-                    commonMethod.showSnackBarFromResource(eventsListContainer, R.string.birthday_error, this)
+                    commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.birthday_error, this)
             else
-                commonMethod.showSnackBarFromResource(eventsListContainer, R.string.national_id_error, this)
+                commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.national_id_error, this)
         else
-            commonMethod.showSnackBarFromResource(eventsListContainer, R.string.name_error, this)
+            commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.name_error, this)
+    }
+
+    private fun getBirthday()
+    {
+        birthdayDateET.setOnClickListener {
+            getDateCalender()
+            DatePickerDialog(this, this, year,month,day).show()
+        }
+    }
+
+    private fun getDateCalender()
+    {
+        val calender:Calendar = Calendar.getInstance()
+        day = calender.get(Calendar.DAY_OF_MONTH)
+        month = calender.get(Calendar.MONTH)
+        year = calender.get(Calendar.YEAR)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        savedDay = dayOfMonth
+        savedMonth = month +1
+        savedYear = year
+
+        birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
+        birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
     }
 
     override fun submitSuccess(response: BookingResponseModule)
@@ -225,7 +224,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     override fun getError(msg: String)
     {
         if(isAttached)
-            commonMethod.showSnackBarFromString(eventsListContainer, msg)
+            commonMethod.showSnackBarFromString(bookingEventContainer, msg)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -244,40 +243,5 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         presenter!!.detachedView()
         isAttached = false
     }
-
-
-
-
-    //Romany
-
-    private fun getBirthday()
-    {
-        birthdayDateET.setOnClickListener({
-            getDateCalender()
-            DatePickerDialog(this, this, Year,Month,day).show()
-        })
-    }
-
-
-    private fun getDateCalender()
-    {
-        var calender:Calendar = Calendar.getInstance()
-        day = calender.get(Calendar.DAY_OF_MONTH)
-        Month = calender.get(Calendar.MONTH)
-        Year = calender.get(Calendar.YEAR)
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        savedDay = dayOfMonth
-        savedMonth = month
-        savedYear = year
-
-
-        birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
-    }
-
-
 
 }

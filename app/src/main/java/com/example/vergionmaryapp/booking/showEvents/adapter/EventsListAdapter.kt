@@ -47,11 +47,13 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
 
         holder.eventTitleTv.text = eventObject.eventName
         holder.eventDateTv.text = eventDate
-        holder.eventDayTv.text = commonMethod.getDayNameFromDate(eventDate!!)
+        holder.eventDayTv.text = commonMethod.getDayNameFromDate(eventDate)
+        holder.fromTimeTv.text = eventObject.startTime?.substring(0,5)?.let { commonMethod.convert24Hto12H(it) }
+        holder.toTimeTv.text = eventObject.endTime?.substring(0,5)?.let { commonMethod.convert24Hto12H(it) }
 
         holder.myCardView.setOnClickListener {
             eventObject.id?.let { listener.onItemClicked(it) }
-        }
+        }.toString()
     }
 
     inner class EventHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
@@ -59,6 +61,8 @@ class EventsListAdapter(private var eventsList : ArrayList<EventModule>,
         val eventDateTv = itemView.eventDateTv!!
         val eventDayTv = itemView.eventDayTv!!
         val eventTitleTv = itemView.eventTitleTv!!
+        val fromTimeTv = itemView.from_time!!
+        val toTimeTv = itemView.to_time!!
         val myCardView = itemView.iteme_event_linear!!
     }
 }

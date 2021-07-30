@@ -72,5 +72,20 @@ class CommonMethod
         return false
     }
 
+    fun convert24Hto12H(oldTime : String) : String
+    {
+        try {
+            val formatStr1 = SimpleDateFormat("HH:mm")
+            val formatStr2 = SimpleDateFormat("hh:mm a")
+            val formatStr3 = formatStr1.parse(oldTime)
+            return formatStr2.format(formatStr3)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return ""
+    }
+
 
 }

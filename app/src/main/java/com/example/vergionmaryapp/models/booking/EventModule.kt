@@ -29,4 +29,16 @@ class EventModule : Serializable
     @SerializedName("noofReservedTickets")
     @Expose
     var noOfReservedTickets: Int? = null
+
+    @SerializedName("startTime")
+    @Expose
+    var startTime: String? = null
+
+    @SerializedName("endTime")
+    @Expose
+    var endTime: String? = null
+
+    @SerializedName("notes")
+    @Expose
+    var notes: String? = null
 }
