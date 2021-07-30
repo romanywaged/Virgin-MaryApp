@@ -12,7 +12,7 @@ interface IBookingController
         fun showLoading()
         fun hideLoading()
 
-        fun submitSuccess(response : BookingResponseModule)
+        fun submitSuccess(ticketNumber : String)
         fun getError(msg : String)
     }
 

@@ -15,6 +15,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
+import com.example.vergionmaryapp.booking.BookingConfirmationActivity
 import com.example.vergionmaryapp.models.RequestBookingBody
 import com.example.vergionmaryapp.models.booking.BookingResponseModule
 import com.example.vergionmaryapp.models.booking.UserObject
@@ -189,7 +190,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     private fun getDateCalender()
     {
-        var calender:Calendar = Calendar.getInstance()
+        val calender:Calendar = Calendar.getInstance()
         day = calender.get(Calendar.DAY_OF_MONTH)
         month = calender.get(Calendar.MONTH)
         year = calender.get(Calendar.YEAR)
@@ -218,11 +219,12 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     }
 
-    override fun submitSuccess(response: BookingResponseModule)
+    override fun submitSuccess(ticketNumber : String)
     {
         if(isAttached)
         {
-            val intent = Intent(this,BookingConfirmationActivity::class.java)
+            val intent = Intent(this, BookingConfirmationActivity::class.java)
+            intent.putExtra("ticketNumberConfirmation" , ticketNumber)
             startActivity(intent)
         }
     }

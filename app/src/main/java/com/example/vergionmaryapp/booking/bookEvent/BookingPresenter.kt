@@ -26,9 +26,12 @@ class BookingPresenter (private var interactor : BookingInteractor, private var 
                         view?.hideLoading()
 
                         if(bookingResponse.message!!.contains("تم تاكيد الحجز بكود"))
-                            view?.submitSuccess(bookingResponse)
+                        {
+                            val ticketNumber = bookingResponse.message!!.replace("تم تاكيد الحجز بكود","")
+                                    .replace(", من فضلك احتفظ بالكود", "")
+                            view?.submitSuccess(ticketNumber)
 
-                        else
+                        } else
                             view?.getError(bookingResponse.message!!)
                     }
 
