@@ -203,14 +203,29 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         savedMonth = month+1
         savedYear = year
 
-        if (savedDay<10 || savedMonth < 10)
+        if (savedDay<10 && savedMonth<10)
         {
             val strDay = "0$savedDay"
             val strMonth = "0$savedMonth"
             birthdayWithoutSpace = "$savedYear$strMonth$strDay"
-
             birthdayDateET.setText("$savedYear-$strMonth-$strDay")
         }
+
+        else if (savedDay<10 )
+        {
+            val strDay = "0$savedDay"
+            birthdayWithoutSpace = "$savedYear$savedMonth$strDay"
+
+            birthdayDateET.setText("$savedYear-$savedMonth-$strDay")
+        }
+        else if (savedMonth < 10)
+        {
+            val strMonth = "0$savedMonth"
+            birthdayWithoutSpace = "$savedYear$strMonth$savedDay"
+
+            birthdayDateET.setText("$savedYear-$strMonth-$savedDay")
+        }
+
         else
         {
             birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
