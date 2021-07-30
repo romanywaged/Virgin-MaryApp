@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="8dp"
+    android:id="@+id/bookingEventContainer">
 
     <LinearLayout
         android:id="@+id/body_content"
@@ -25,12 +26,14 @@
             android:layout_marginTop="1dp"
             style="@style/edit_text_sty"
             android:inputType="text"
+            android:textDirection="rtl"
             android:hint="@string/full_name" />
 
         <EditText
             android:id="@+id/nationalIdET"
             style="@style/edit_text_sty"
             android:inputType="number"
+            android:textDirection="rtl"
             android:hint="@string/national_id" />
 
         <EditText
@@ -50,6 +53,7 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:overlapAnchor="false"
                 android:background="@drawable/bg_white_with_gray_border" />
 
         </RelativeLayout>

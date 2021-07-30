@@ -6,7 +6,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.StringBuilderPrinter
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -26,7 +25,6 @@ import com.example.vergionmaryapp.utils.ProgressDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_booking_event.*
-import kotlinx.android.synthetic.main.activity_reserve_event.*
 import java.lang.ref.WeakReference
 import java.util.*
 import javax.inject.Inject
@@ -46,19 +44,18 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     private var isAttached = false
     private var isUpdate = false
 
+    private var pageTitle = ""
+    private var birthdayWithoutSpace = ""
     private var eventId = 0
     private var userGender = 0
-    private var pageTitle = ""
 
-//Romany
     private var day = 0
-    private var Month = 0
-    private var Year = 0
-
-
+    private var month = 0
+    private var year = 0
     private var savedDay = 0
     private var savedMonth = 0
     private var savedYear = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -79,19 +76,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
-
-
-
-
-        //Romany
-        getBirthday()
-
-    }
-
-    private fun moveConfirmation() {
-           var intent:Intent = Intent(this,BookingConfirmationActivity::class.java)
-            startActivity(intent)
-
     }
 
     override fun onStart()
@@ -111,35 +95,12 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     private fun initView()
     {
-
-        birthdayDateET.inputType = 0
         handleGenderSpinner(genderSpinner)
+        getBirthday()
+        birthdayDateET.inputType = 0
 
         confirmBookingBtn.setOnClickListener {
-           // validateInputFields()
-
-
-            val requestBookingBody = RequestBookingBody()
-            requestBookingBody.eventDayId = eventId
-            requestBookingBody.noofTickets = 1
-            requestBookingBody.reservationCode = ""
-            requestBookingBody.secretPin = ""
-            requestBookingBody.requesterNationalId = "29406090102629"
-
-            val userObject = UserObject()
-            val userList = ArrayList<UserObject>()
-
-            userObject.userFullName = "Marina"
-            userObject.userNationalId = "29406090102629"
-            userObject.userGenderId = 1
-            userList.add(userObject)
-            requestBookingBody.userObject = userList
-
-            presenter!!.submitBookingObject(requestBookingBody)
-
-            moveConfirmation()
-
-
+            validateInputFields()
         }
 
         cancelBtn.setOnClickListener {
@@ -153,7 +114,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         dayList.add("ذكر")
         dayList.add("انثي")
 
-        val spinnerArrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, dayList)
+        val spinnerArrayAdapter = ArrayAdapter<String>(this, R.layout.si_items_gender, dayList)
 
         if(isUpdate)
             mySpinner.adapter = spinnerArrayAdapter
@@ -178,7 +139,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         }
     }
 
-
     private fun validateInputFields()
     {
         val fullName = fullNameET.text.toString().trim()
@@ -188,7 +148,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         if(fullName.isNotBlank())
             if(nationalId.isNotBlank())
                 if(birthdayDate.isNotBlank())
-                    if(userGender != 0)
+                    if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
                     {
                         val requestBookingBody = RequestBookingBody()
                         requestBookingBody.eventDayId = eventId
@@ -208,17 +168,53 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
                         requestBookingBody.userObject = userList
 
                         presenter!!.submitBookingObject(requestBookingBody)
-                    }
 
-//                    else
-//                        view!!.appointmentEmpty()
-//                else
-//                    view!!.addressEmpty()
-//            else
-//                view!!.specialityEmpty()
-//
-//        else
-//            view!!.nameEmpty()
+                    }else
+                        commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
+                else
+                    commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.birthday_error, this)
+            else
+                commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.national_id_error, this)
+        else
+            commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.name_error, this)
+    }
+
+    private fun getBirthday()
+    {
+        birthdayDateET.setOnClickListener {
+            getDateCalender()
+            DatePickerDialog(this, this, year,month,day).show()
+        }
+    }
+
+    private fun getDateCalender()
+    {
+        var calender:Calendar = Calendar.getInstance()
+        day = calender.get(Calendar.DAY_OF_MONTH)
+        month = calender.get(Calendar.MONTH)
+        year = calender.get(Calendar.YEAR)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
+    {
+        savedDay = dayOfMonth
+        savedMonth = month+1
+        savedYear = year
+
+        if (savedDay<10 || savedMonth < 10)
+        {
+            val strDay = "0$savedDay"
+            val strMonth = "0$savedMonth"
+            birthdayWithoutSpace = "$savedYear$strMonth$strDay"
+
+            birthdayDateET.setText("$savedYear-$strMonth-$strDay")
+        }
+        else
+        {
+            birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
+            birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
+        }
 
     }
 
@@ -226,6 +222,8 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     {
         if(isAttached)
         {
+            val intent = Intent(this,BookingConfirmationActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -238,7 +236,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     override fun getError(msg: String)
     {
         if(isAttached)
-            commonMethod.showSnackBarFromString(eventsListContainer, msg)
+            commonMethod.showSnackBarFromString(bookingEventContainer, msg)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -257,49 +255,5 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         presenter!!.detachedView()
         isAttached = false
     }
-
-
-
-
-    //Romany
-
-    private fun getBirthday()
-    {
-        birthdayDateET.setOnClickListener({
-            getDateCalender()
-            DatePickerDialog(this, this, Year,Month,day).show()
-        })
-    }
-
-
-    private fun getDateCalender()
-    {
-        var calender:Calendar = Calendar.getInstance()
-        day = calender.get(Calendar.DAY_OF_MONTH)
-        Month = calender.get(Calendar.MONTH)
-        Year = calender.get(Calendar.YEAR)
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
-        savedDay = dayOfMonth
-        savedMonth = month
-        savedYear = year
-
-        if (savedDay<10 || savedMonth < 10)
-        {
-            var strDay:String = "0" + "$savedDay"
-            var strMonth:String = "0" + "$savedMonth"
-            birthdayDateET.setText("$savedYear-" + strMonth + "-" + strDay)
-        }
-        else
-        {
-            birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
-        }
-    }
-
-
 
 }

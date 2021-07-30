@@ -7,7 +7,7 @@
     android:textAlignment="textStart"
     android:singleLine="true"
     android:text="@string/gender"
-    android:textColor="@color/spinner_hint"
+    android:textColor="@color/light_black"
     android:layout_marginBottom="5dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
