@@ -65,9 +65,10 @@ class CommonMethod
     {
         if(nationalId.length == 14)
         {
-            val birthdayFromID = nationalId.substring(1,6)
+            val birthdayFromID = nationalId.substring(1,7)
 
-            return birthdayFromID == birthdayStr
+            val subBirthday = birthdayStr.substring(2,8)
+            return birthdayFromID == subBirthday
         }
         return false
     }

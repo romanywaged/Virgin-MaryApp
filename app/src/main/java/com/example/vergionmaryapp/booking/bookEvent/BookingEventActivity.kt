@@ -76,19 +76,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
-
-
-
-
-        //Romany
-        getBirthday()
-
-    }
-
-    private fun moveConfirmation() {
-           var intent:Intent = Intent(this,BookingConfirmationActivity::class.java)
-            startActivity(intent)
-
     }
 
     override fun onStart()
@@ -106,14 +93,11 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             dialog.show()
     }
 
-
     private fun initView()
     {
         handleGenderSpinner(genderSpinner)
         getBirthday()
         birthdayDateET.inputType = 0
-
-        //"29406090102629"
 
         confirmBookingBtn.setOnClickListener {
             validateInputFields()
@@ -160,7 +144,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         val fullName = fullNameET.text.toString().trim()
         val nationalId = nationalIdET.text.toString().trim()
         val birthdayDate = birthdayDateET.text.toString().trim()
-        val birthdayWithoutSpace = ""
 
         if(fullName.isNotBlank())
             if(nationalId.isNotBlank())
@@ -196,16 +179,13 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.name_error, this)
     }
 
-    //Romany
-
     private fun getBirthday()
     {
-        birthdayDateET.setOnClickListener({
+        birthdayDateET.setOnClickListener {
             getDateCalender()
             DatePickerDialog(this, this, year,month,day).show()
-        })
+        }
     }
-
 
     private fun getDateCalender()
     {
@@ -216,28 +196,34 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
+    {
         savedDay = dayOfMonth
-        savedMonth = month
+        savedMonth = month+1
         savedYear = year
 
         if (savedDay<10 || savedMonth < 10)
         {
-            var strDay:String = "0" + "$savedDay"
-            var strMonth:String = "0" + "$savedMonth"
-            birthdayDateET.setText("$savedYear-" + strMonth + "-" + strDay)
+            val strDay = "0$savedDay"
+            val strMonth = "0$savedMonth"
+            birthdayWithoutSpace = "$savedYear$strMonth$strDay"
+
+            birthdayDateET.setText("$savedYear-$strMonth-$strDay")
         }
         else
         {
+            birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
             birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
         }
+
     }
 
     override fun submitSuccess(response: BookingResponseModule)
     {
         if(isAttached)
         {
+            val intent = Intent(this,BookingConfirmationActivity::class.java)
+            startActivity(intent)
         }
     }
 
