@@ -17,7 +17,6 @@ import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
 import com.example.vergionmaryapp.booking.BookingConfirmationActivity
 import com.example.vergionmaryapp.models.RequestBookingBody
-import com.example.vergionmaryapp.models.booking.BookingResponseModule
 import com.example.vergionmaryapp.models.booking.UserObject
 import com.example.vergionmaryapp.utils.CommonMethod
 import com.example.vergionmaryapp.utils.MyApplicationSharedPreference
@@ -149,29 +148,32 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         if(fullName.isNotBlank())
             if(nationalId.isNotBlank())
                 if(birthdayDate.isNotBlank())
-                    if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
-                    {
-                        val requestBookingBody = RequestBookingBody()
-                        requestBookingBody.eventDayId = eventId
-                        requestBookingBody.noofTickets = 1
-                        requestBookingBody.reservationCode = ""
-                        requestBookingBody.secretPin = ""
-                        requestBookingBody.requesterNationalId = nationalId
+                    if(userGender != 0)
+                        if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
+                        {
+                            val requestBookingBody = RequestBookingBody()
+                            requestBookingBody.eventDayId = eventId
+                            requestBookingBody.noofTickets = 1
+                            requestBookingBody.reservationCode = ""
+                            requestBookingBody.secretPin = ""
+                            requestBookingBody.requesterNationalId = nationalId
 
-                        val userObject = UserObject()
-                        val userList = ArrayList<UserObject>()
+                            val userObject = UserObject()
+                            val userList = ArrayList<UserObject>()
 
-                        userObject.userFullName = fullName
-                        userObject.userNationalId = nationalId
-                        userObject.userGenderId = userGender
+                            userObject.userFullName = fullName
+                            userObject.userNationalId = nationalId
+                            userObject.userGenderId = userGender
 
-                        userList.add(userObject)
-                        requestBookingBody.userObject = userList
+                            userList.add(userObject)
+                            requestBookingBody.userObject = userList
 
-                        presenter!!.submitBookingObject(requestBookingBody)
+                            presenter!!.submitBookingObject(requestBookingBody)
 
-                    }else
-                        commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
+                        }else
+                            commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
+                    else
+                        commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.gender_error, this)
                 else
                     commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.birthday_error, this)
             else
