@@ -27,8 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".booking.BookingConfirmationActivity"
-            android:theme="@style/TarnemaStyle" />
+            android:name=".booking.BookingConfirmationActivity" />
         <activity
             android:name=".activities.AboutActivity"
             android:theme="@style/TarnemaStyle" />

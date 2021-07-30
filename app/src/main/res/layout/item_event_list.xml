@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/row_data"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:background="@drawable/bg_filter_shado_white_left_red"
         android:layout_marginTop="10dp"
         android:layout_marginStart="5dp"
@@ -107,6 +107,7 @@
             android:layout_marginEnd="7dp"/>
 
         <LinearLayout
+            android:id="@+id/timeLin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/eventDateLin"
@@ -127,6 +128,19 @@
                 style="@style/gray_text" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/noteTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:layout_below="@+id/timeLin"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center" />
 
     </RelativeLayout>
 

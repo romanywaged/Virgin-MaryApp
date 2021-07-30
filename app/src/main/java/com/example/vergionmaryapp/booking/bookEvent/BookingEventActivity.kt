@@ -241,6 +241,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             val intent = Intent(this, BookingConfirmationActivity::class.java)
             intent.putExtra("ticketNumberConfirmation" , ticketNumber)
             startActivity(intent)
+            finish()
         }
     }
 
