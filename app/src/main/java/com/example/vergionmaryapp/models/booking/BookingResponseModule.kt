@@ -20,5 +20,5 @@ class BookingResponseModule : Serializable
 
     @SerializedName("response")
     @Expose
-    var eventsList: List<EventModule>? = null
+    var eventsList  = null
 }
