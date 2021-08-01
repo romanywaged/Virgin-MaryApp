@@ -66,7 +66,6 @@ public class HomeActivity extends AppCompatActivity
         pagers.add(new PagerClass(R.drawable.vergion));
         pagers.add(new PagerClass(R.drawable.churcch));
         pagers.add(new PagerClass(R.drawable.churchh));
-        pagers.add(new PagerClass(R.drawable.church));
         adapter=new SlidehomeAdapter(HomeActivity.this,pagers);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager,true);

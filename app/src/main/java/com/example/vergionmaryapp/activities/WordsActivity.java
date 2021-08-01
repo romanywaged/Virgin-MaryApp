@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,11 +22,10 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WordsActivity extends AppCompatActivity {
+public class WordsActivity extends AppCompatActivity{
 
     @BindView(R.id.words)
     TextView hymenWords;
-
     String words, Name;
 
     @Override
@@ -36,7 +37,9 @@ public class WordsActivity extends AppCompatActivity {
         words = getIntent().getExtras().getString("Words");
         Name = getIntent().getExtras().getString("Name");
 
+
         hymenWords.setText(words);
+
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,4 +82,7 @@ public class WordsActivity extends AppCompatActivity {
         manager.setPrimaryClip(clipData);
         Toast.makeText(this, "Copied", Toast.LENGTH_LONG).show();
     }
+
+
+
 }

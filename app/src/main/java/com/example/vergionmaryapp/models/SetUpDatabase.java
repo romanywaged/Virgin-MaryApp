@@ -65,7 +65,7 @@ public class SetUpDatabase {
 
     public void setup()
     {
-        for (int i = 0; i<50 ;i++) {
+        for (int i = 0; i<hymens_names.size() ;i++) {
             readFile(+ i +"");
             hymensList.add(new Hymens(hymens_names.get(i), words));
         }
