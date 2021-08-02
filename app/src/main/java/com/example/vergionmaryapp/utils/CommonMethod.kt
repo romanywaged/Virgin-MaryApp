@@ -2,6 +2,7 @@ package com.example.vergionmaryapp.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.util.Log
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -71,6 +72,22 @@ class CommonMethod
 
             val subBirthday = birthdayStr.substring(2,8)
             return birthdayFromID == subBirthday
+        }
+        return false
+    }
+
+    fun validateGender(nationalId : String, genderId : Int) : Boolean
+    {
+        Log.d("","")
+        var subGenderID = 0
+
+        if(nationalId.length == 14)
+        {
+            val genderFromID = nationalId.substring(12).toInt()
+
+            subGenderID = if(genderFromID %2 == 0) 2 else 1
+
+            return subGenderID == genderId
         }
         return false
     }

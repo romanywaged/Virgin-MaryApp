@@ -171,7 +171,8 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
             if(nationalId.isNotBlank())
                 if(birthdayDate.isNotBlank())
                     if(userGender != 0)
-                        if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
+                        if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace)
+                                && commonMethod.validateGender(nationalId, userGender))
                         {
                             val requestBookingBody = RequestBookingBody()
                             requestBookingBody.eventDayId = eventId
