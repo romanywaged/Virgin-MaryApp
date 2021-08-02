@@ -78,16 +78,13 @@ class CommonMethod
 
     fun validateGender(nationalId : String, genderId : Int) : Boolean
     {
-        Log.d("","")
-        var subGenderID = 0
-
         if(nationalId.length == 14)
         {
-            val genderFromID = nationalId.substring(12).toInt()
+            val genderFromID = nationalId.substring(12,13).toInt()
 
-            subGenderID = if(genderFromID %2 == 0) 2 else 1
+            val subGenderID = if(genderFromID%2 == 0) 2 else 1
 
-            return subGenderID == genderId
+            return genderId == subGenderID
         }
         return false
     }

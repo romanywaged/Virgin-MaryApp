@@ -29,7 +29,6 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
 class BookingEventActivity : AppCompatActivity(), IBookingController.View
 {
     @Inject
@@ -50,7 +49,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
     private var userGender = 0
 
     val myCalender = Calendar.getInstance()
-    var dd:Date = myCalender.time
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -72,31 +70,27 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
 
-        val datepicker = DatePickerDialog.OnDateSetListener{
+        val datePicker = DatePickerDialog.OnDateSetListener{
             _, year, month, dayOfMonth ->
             myCalender.set(Calendar.YEAR,year)
             myCalender.set(Calendar.MONTH,month)
             myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
 
-            birthdayWithoutSpace = "$year$month+1$dayOfMonth"
-
             updateLable(myCalender)
+
         }
 
         birthdayDateET.setOnClickListener {
-            //getDateCalender()
-            DatePickerDialog(this, datepicker, myCalender.get(Calendar.YEAR)
+            DatePickerDialog(this, datePicker, myCalender.get(Calendar.YEAR)
                     ,myCalender.get(Calendar.MONTH),myCalender.get(Calendar.DAY_OF_MONTH)).show()
         }
-
-
     }
 
     private fun updateLable(myCalender: Calendar) {
-        val myFormatt = "yyyy-MM-dd"
-        val sdf = SimpleDateFormat(myFormatt, Locale.UK)
+        val myFormat = "yyyy-MM-dd"
+        val sdf = SimpleDateFormat(myFormat, Locale.UK)
         fullBirthday = sdf.format(myCalender.time)
-        dd = SimpleDateFormat(myFormatt).parse(fullBirthday)
+        birthdayWithoutSpace = fullBirthday.replace("-","")
         birthdayDateET.setText(fullBirthday)
     }
 
@@ -118,7 +112,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
     private fun initView()
     {
         handleGenderSpinner(genderSpinner)
-
         birthdayDateET.inputType = 0
 
         confirmBookingBtn.setOnClickListener {
@@ -171,30 +164,32 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
             if(nationalId.isNotBlank())
                 if(birthdayDate.isNotBlank())
                     if(userGender != 0)
-                        if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace)
-                                && commonMethod.validateGender(nationalId, userGender))
-                        {
-                            val requestBookingBody = RequestBookingBody()
-                            requestBookingBody.eventDayId = eventId
-                            requestBookingBody.noofTickets = 1
-                            requestBookingBody.reservationCode = ""
-                            requestBookingBody.secretPin = ""
-                            requestBookingBody.requesterNationalId = nationalId
+                        if(commonMethod.validateNationalID(nationalId, birthdayWithoutSpace))
+                            if(commonMethod.validateGender(nationalId, userGender))
+                            {
+                                val requestBookingBody = RequestBookingBody()
+                                requestBookingBody.eventDayId = eventId
+                                requestBookingBody.noofTickets = 1
+                                requestBookingBody.reservationCode = ""
+                                requestBookingBody.secretPin = ""
+                                requestBookingBody.requesterNationalId = nationalId
 
-                            val userObject = UserObject()
-                            val userList = ArrayList<UserObject>()
+                                val userObject = UserObject()
+                                val userList = ArrayList<UserObject>()
 
-                            userObject.userFullName = fullName
-                            userObject.userNationalId = nationalId
-                            userObject.userGenderId = userGender
-                            userObject.userBirthDate = fullBirthday
+                                userObject.userFullName = fullName
+                                userObject.userNationalId = nationalId
+                                userObject.userGenderId = userGender
+                                userObject.userBirthDate = fullBirthday
 
-                            userList.add(userObject)
-                            requestBookingBody.userObject = userList
+                                userList.add(userObject)
+                                requestBookingBody.userObject = userList
 
-                            presenter!!.submitBookingObject(requestBookingBody)
+                                presenter!!.submitBookingObject(requestBookingBody)
 
-                        }else
+                            }else
+                                commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
+                        else
                             commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.data_error, this)
                     else
                         commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.gender_error, this)
