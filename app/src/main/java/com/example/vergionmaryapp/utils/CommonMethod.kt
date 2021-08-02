@@ -2,10 +2,7 @@ package com.example.vergionmaryapp.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.Build
-import android.provider.Settings.System.DATE_FORMAT
 import android.view.View
-import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.text.ParseException
@@ -97,7 +94,6 @@ class CommonMethod
     fun convertStringDate(dateStr : String) : Date
     {
         var myDate = Date()
-        var newDate = Date()
         val myDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val formattedStr = myDateFormat.format(myDate)
 

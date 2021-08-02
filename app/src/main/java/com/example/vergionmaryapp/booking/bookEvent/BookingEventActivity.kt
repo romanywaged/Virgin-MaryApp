@@ -1,19 +1,15 @@
 package com.example.vergionmaryapp.booking.bookEvent
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.Spinner
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
@@ -29,8 +25,6 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_booking_event.*
 import java.lang.ref.WeakReference
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -55,13 +49,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
     private var eventId = 0
     private var userGender = 0
 
-    private var day = 0
-    private var month = 0
-    private var year = 0
-    private var savedDay = 0
-    private var savedMonth = 0
-    private var savedYear = 0
-
     val myCalender = Calendar.getInstance()
     var dd:Date = myCalender.time
 
@@ -85,14 +72,14 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
 
-
-
-
         val datepicker = DatePickerDialog.OnDateSetListener{
-            view, year, month, dayOfMonth ->
+            _, year, month, dayOfMonth ->
             myCalender.set(Calendar.YEAR,year)
             myCalender.set(Calendar.MONTH,month)
             myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+
+            birthdayWithoutSpace = "$year$month+1$dayOfMonth"
+
             updateLable(myCalender)
         }
 
@@ -109,7 +96,6 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         val myFormatt = "yyyy-MM-dd"
         val sdf = SimpleDateFormat(myFormatt, Locale.UK)
         fullBirthday = sdf.format(myCalender.time)
-        birthdayWithoutSpace = "19990421"
         dd = SimpleDateFormat(myFormatt).parse(fullBirthday)
         birthdayDateET.setText(fullBirthday)
     }
@@ -200,7 +186,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
                             userObject.userFullName = fullName
                             userObject.userNationalId = nationalId
                             userObject.userGenderId = userGender
-                            userObject.userBirthDate = myCalender.time
+                            userObject.userBirthDate = fullBirthday
 
                             userList.add(userObject)
                             requestBookingBody.userObject = userList

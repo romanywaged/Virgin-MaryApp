@@ -21,5 +21,5 @@ class UserObject : Serializable
 
     @SerializedName("birthDate")
     @Expose
-    var userBirthDate: Date? = null
+    var userBirthDate: String? = null
 }
