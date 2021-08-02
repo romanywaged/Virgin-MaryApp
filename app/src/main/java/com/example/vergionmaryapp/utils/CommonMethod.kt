@@ -2,12 +2,17 @@ package com.example.vergionmaryapp.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Build
+import android.provider.Settings.System.DATE_FORMAT
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+
 
 @Suppress("DEPRECATION")
 class CommonMethod
@@ -88,5 +93,21 @@ class CommonMethod
         return ""
     }
 
+
+    fun convertStringDate(dateStr : String) : Date
+    {
+        var myDate = Date()
+        var newDate = Date()
+        val myDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val formattedStr = myDateFormat.format(myDate)
+
+        try {
+            myDate = myDateFormat.parse(dateStr)
+
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+            return myDate
+    }
 
 }

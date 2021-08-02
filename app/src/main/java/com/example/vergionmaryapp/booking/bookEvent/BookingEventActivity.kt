@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.vergionmaryapp.MyFreeApplication
 import com.example.vergionmaryapp.R
@@ -26,12 +28,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_booking_event.*
 import java.lang.ref.WeakReference
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
-class BookingEventActivity : AppCompatActivity(), IBookingController.View, DatePickerDialog.OnDateSetListener
+class BookingEventActivity : AppCompatActivity(), IBookingController.View
 {
     @Inject
     lateinit var interactor : BookingInteractor
@@ -46,6 +51,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
 
     private var pageTitle = ""
     private var birthdayWithoutSpace = ""
+    private var fullBirthday = ""
     private var eventId = 0
     private var userGender = 0
 
@@ -56,6 +62,8 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     private var savedMonth = 0
     private var savedYear = 0
 
+    val myCalender = Calendar.getInstance()
+    var dd:Date = myCalender.time
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -76,6 +84,34 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.title = pageTitle
+
+
+
+
+        val datepicker = DatePickerDialog.OnDateSetListener{
+            view, year, month, dayOfMonth ->
+            myCalender.set(Calendar.YEAR,year)
+            myCalender.set(Calendar.MONTH,month)
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            updateLable(myCalender)
+        }
+
+        birthdayDateET.setOnClickListener {
+            //getDateCalender()
+            DatePickerDialog(this, datepicker, myCalender.get(Calendar.YEAR)
+                    ,myCalender.get(Calendar.MONTH),myCalender.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+
+    }
+
+    private fun updateLable(myCalender: Calendar) {
+        val myFormatt = "yyyy-MM-dd"
+        val sdf = SimpleDateFormat(myFormatt, Locale.UK)
+        fullBirthday = sdf.format(myCalender.time)
+        birthdayWithoutSpace = "19990421"
+        dd = SimpleDateFormat(myFormatt).parse(fullBirthday)
+        birthdayDateET.setText(fullBirthday)
     }
 
     override fun onStart()
@@ -96,7 +132,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
     private fun initView()
     {
         handleGenderSpinner(genderSpinner)
-        getBirthday()
+
         birthdayDateET.inputType = 0
 
         confirmBookingBtn.setOnClickListener {
@@ -164,6 +200,7 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
                             userObject.userFullName = fullName
                             userObject.userNationalId = nationalId
                             userObject.userGenderId = userGender
+                            userObject.userBirthDate = myCalender.time
 
                             userList.add(userObject)
                             requestBookingBody.userObject = userList
@@ -182,59 +219,9 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             commonMethod.showSnackBarFromResource(bookingEventContainer, R.string.name_error, this)
     }
 
-    private fun getBirthday()
-    {
-        birthdayDateET.setOnClickListener {
-            getDateCalender()
-            DatePickerDialog(this, this, year,month,day).show()
-        }
-    }
 
-    private fun getDateCalender()
-    {
-        val calender:Calendar = Calendar.getInstance()
-        day = calender.get(Calendar.DAY_OF_MONTH)
-        month = calender.get(Calendar.MONTH)
-        year = calender.get(Calendar.YEAR)
-    }
 
-    @SuppressLint("SetTextI18n")
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int)
-    {
-        savedDay = dayOfMonth
-        savedMonth = month+1
-        savedYear = year
 
-        if (savedDay<10 && savedMonth<10)
-        {
-            val strDay = "0$savedDay"
-            val strMonth = "0$savedMonth"
-            birthdayWithoutSpace = "$savedYear$strMonth$strDay"
-            birthdayDateET.setText("$savedYear-$strMonth-$strDay")
-        }
-
-        else if (savedDay<10 )
-        {
-            val strDay = "0$savedDay"
-            birthdayWithoutSpace = "$savedYear$savedMonth$strDay"
-
-            birthdayDateET.setText("$savedYear-$savedMonth-$strDay")
-        }
-        else if (savedMonth < 10)
-        {
-            val strMonth = "0$savedMonth"
-            birthdayWithoutSpace = "$savedYear$strMonth$savedDay"
-
-            birthdayDateET.setText("$savedYear-$strMonth-$savedDay")
-        }
-
-        else
-        {
-            birthdayWithoutSpace = "$savedYear$savedMonth$savedDay"
-            birthdayDateET.setText("$savedYear-$savedMonth-$savedDay")
-        }
-
-    }
 
     override fun submitSuccess(ticketNumber : String)
     {
@@ -259,7 +246,8 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View, DateP
             commonMethod.showSnackBarFromString(bookingEventContainer, msg)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
