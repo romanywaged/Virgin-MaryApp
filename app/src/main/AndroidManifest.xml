@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.vergionmaryapp">
+    package="com.church.virginmaryapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".MyFreeApplication"
+        android:name="com.church.virginmaryapp.MyFreeApplication"
         android:allowBackup="false"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name="com.church.virginmaryapp.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,25 +27,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".booking.BookingConfirmationActivity" />
+            android:name="com.church.virginmaryapp.booking.BookingConfirmationActivity" />
         <activity
-            android:name=".activities.AboutActivity"
+            android:name="com.church.virginmaryapp.activities.AboutActivity"
             android:theme="@style/TarnemaStyle" />
-        <activity android:name=".activities.HomeActivity">
+        <activity android:name="com.church.virginmaryapp.activities.HomeActivity">
         </activity>
         <activity
-            android:name=".activities.HymensActivity"
+            android:name="com.church.virginmaryapp.activities.HymensActivity"
             android:theme="@style/AddChoirTheme" />
         <activity
-            android:name=".booking.showEvents.EventListViewActivity"
+            android:name="com.church.virginmaryapp.booking.showEvents.EventListViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AddChoirTheme" />
         <activity
-            android:name=".booking.bookEvent.BookingEventActivity"
+            android:name="com.church.virginmaryapp.booking.bookEvent.BookingEventActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AddChoirTheme" />
         <activity
-            android:name=".activities.WordsActivity"
+            android:name="com.church.virginmaryapp.activities.WordsActivity"
             android:theme="@style/TarnemaStyle" />
     </application>
 
