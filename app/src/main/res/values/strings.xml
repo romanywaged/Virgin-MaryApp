@@ -31,5 +31,12 @@
 
     <string name="confermbook">تم الحجز بنجاح من فضلك احتفظ بكود التسجيل لتتمكن من الحضور</string>
     <string name="testCode">1492-01-202181</string>
+    <string name="describeHymens">جميع تماجيد والحان العدرا</string>
+    <string name="booking_aodas_describe">حجز جميع القداسات </string>
+    <string name="followResevation">متابعة حجوزاتى</string>
+    <string name="followResevation_desc">متابعة والغاء الحجوزات</string>
+    <string name="aya">كل يوم آيه</string>
+    <string name="aya_desc">صوت ربنا ليك</string>
+    <string name="about_desc">عن البرنامج وحقوق الملكيه</string>
 
 </resources>

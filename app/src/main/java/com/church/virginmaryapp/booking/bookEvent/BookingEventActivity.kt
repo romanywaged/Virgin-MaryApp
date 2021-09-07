@@ -1,5 +1,6 @@
 package com.church.virginmaryapp.booking.bookEvent
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
@@ -81,8 +82,9 @@ class BookingEventActivity : AppCompatActivity(), IBookingController.View
         }
 
         birthdayDateET.setOnClickListener {
-            DatePickerDialog(this, datePicker, myCalender.get(Calendar.YEAR)
+       var dialog = DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,datePicker, myCalender.get(Calendar.YEAR)
                     ,myCalender.get(Calendar.MONTH),myCalender.get(Calendar.DAY_OF_MONTH)).show()
+
         }
     }
 

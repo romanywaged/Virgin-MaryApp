@@ -1,6 +1,6 @@
 package com.church.virginmaryapp.utils
 
-const val BASE_URL: String = "https://vmc-eventsreservationsapi.azurewebsites.net/api/"
+const val BASE_URL: String = "https://eventsreservations.virgin-mary-church.com/api/"
 
             //Booking
 const val GET_EVENTS_BY_CATEGORY_ID = "eventday/category/{eventCategoryId}"

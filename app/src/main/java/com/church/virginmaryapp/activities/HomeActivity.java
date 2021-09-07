@@ -31,18 +31,18 @@ public class HomeActivity extends AppCompatActivity
 
 
 
-    @BindView(R.id.homePager)
-    ViewPager viewPager;
+  //  @BindView(R.id.homePager)
+    //ViewPager viewPager;
 
-    @BindView(R.id.tabLayout)
-    TabLayout tabLayout;
+   // @BindView(R.id.tabLayout)
+   // TabLayout tabLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.dashboard_layout);
 
         ButterKnife.bind(this);
 
@@ -65,12 +65,12 @@ public class HomeActivity extends AppCompatActivity
         pagers.add(new PagerClass(R.drawable.churcch));
         pagers.add(new PagerClass(R.drawable.churchh));
         adapter=new SlidehomeAdapter(HomeActivity.this,pagers);
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager,true);
+     //   viewPager.setAdapter(adapter);
+      //  tabLayout.setupWithViewPager(viewPager,true);
 
 
         Timer timer=new Timer();
-        timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,4000);
+       // timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,4000);
 
 
     }
@@ -86,12 +86,6 @@ public class HomeActivity extends AppCompatActivity
     public void onClickBookAodas()
     {
         openElReservationEventsView(1, getString(R.string.booking_aodas));
-    }
-
-    @OnClick(R.id.bookNahdaCardView)
-    public void onClickBookNahda()
-    {
-        openElReservationEventsView(2, getString(R.string.booking_nahda));
     }
 
     @OnClick(R.id.aboutCardView)
@@ -112,7 +106,7 @@ public class HomeActivity extends AppCompatActivity
 
 
 
-    class SliderTimer extends TimerTask {
+   /* class SliderTimer extends TimerTask {
         @Override
         public void run() {
             HomeActivity.this.runOnUiThread(new Runnable() {
@@ -127,7 +121,7 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
         }
-    }
+    }*/
 
 
 
