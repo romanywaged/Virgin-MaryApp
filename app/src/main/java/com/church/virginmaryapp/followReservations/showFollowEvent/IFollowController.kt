@@ -1,12 +1,10 @@
-package com.church.virginmaryapp.booking.showEvents
+package com.church.virginmaryapp.followReservations.showFollowEvent
 
 import com.church.virginmaryapp.base.basePresenter.ParentInterface
 import com.church.virginmaryapp.base.basePresenter.ParentPresenter
 import com.church.virginmaryapp.models.booking.EventModule
 
-
-interface IEventsController
-{
+interface IFollowController {
     interface View : ParentInterface
     {
         fun showLoading()
@@ -20,6 +18,6 @@ interface IEventsController
 
     interface Presenter : ParentPresenter<View>
     {
-        fun getEventsList(Id: Int)
+        fun getFollowControllerEventList(Id: String)
     }
 }

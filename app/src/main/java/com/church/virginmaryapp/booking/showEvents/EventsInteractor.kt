@@ -8,10 +8,10 @@ import java.io.IOException
 
 class EventsInteractor (private var categoryAPI : CategoryAPI) : IEventsInteractor
 {
-    override fun getEventsList(categoryId: Int): Observable<EventsResponse>
+    override fun getEventsList(Id: Int): Observable<EventsResponse>
     {
         return Observable.defer {
-            categoryAPI.getEventsByCategoryID(categoryId)
+            categoryAPI.getEventsByCategoryID(Id)
                     .retryWhen { observable ->
                         observable.flatMap { throwable ->
                             if (throwable is IOException) {

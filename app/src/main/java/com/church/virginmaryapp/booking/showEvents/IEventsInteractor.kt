@@ -6,5 +6,5 @@ import io.reactivex.Observable
 
 interface IEventsInteractor
 {
-    fun getEventsList(categoryId: Int) : Observable<EventsResponse>
+    fun getEventsList(Id: Int) : Observable<EventsResponse>
 }

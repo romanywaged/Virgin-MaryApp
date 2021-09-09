@@ -11,12 +11,12 @@ class EventsPresenter(private var interactor : EventsInteractor, private var ioS
                       private var mainScheduler: Scheduler) : BasePresenter<IEventsController.View>(),
         IEventsController.Presenter
 {
-    override fun getEventsList(categoryId: Int)
+    override fun getEventsList(Id: Int)
     {
         checkViewAttached()
         view?.showLoading()
 
-        addDisposable(interactor.getEventsList(categoryId)
+        addDisposable(interactor.getEventsList(Id)
                 .subscribeOn(ioScheduler)
                 .observeOn(mainScheduler)
                 .subscribeWith(object : DisposableObserver<EventsResponse>()
