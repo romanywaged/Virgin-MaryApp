@@ -3,6 +3,9 @@ package com.church.virginmaryapp.followReservations.showFollowEvent
 import com.church.virginmaryapp.base.basePresenter.BasePresenter
 import com.church.virginmaryapp.booking.showEvents.IEventsController
 import com.church.virginmaryapp.models.booking.EventsResponse
+import com.church.virginmaryapp.models.canceling.CancelingResponseModule
+import com.church.virginmaryapp.models.follow.FollowEventModule
+import com.church.virginmaryapp.models.follow.FollowEventsResponse
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.Scheduler
 import io.reactivex.internal.disposables.DisposableContainer
@@ -18,8 +21,8 @@ class FollowReservationsPresenter(private var interactor: FollowReservationInter
         addDisposable(interactor.getFollowEventsList(Id)
                 .subscribeOn(IOScheduler)
                 .observeOn(mainscheduler)
-                .subscribeWith(object : DisposableObserver<EventsResponse>() {
-                    override fun onNext(eventResponse: EventsResponse) {
+                .subscribeWith(object : DisposableObserver<FollowEventsResponse>() {
+                    override fun onNext(eventResponse: FollowEventsResponse) {
                         view?.hideLoading()
 
                         if (eventResponse.eventsList != null) {
@@ -42,7 +45,10 @@ class FollowReservationsPresenter(private var interactor: FollowReservationInter
                     }
 
                 }))
+
     }
+
+ 
 
     private fun handleError(e: Throwable) {
         if (e is HttpException)

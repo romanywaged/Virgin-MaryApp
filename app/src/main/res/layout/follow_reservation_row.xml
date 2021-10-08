@@ -118,12 +118,13 @@
         <Button
             android:id="@+id/cancel_reservation_btn_follow"
             android:layout_width="95dp"
-            android:layout_height="75dp"
+            android:layout_height="50dp"
             android:layout_below="@id/timeLin_follow"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/follow_reserv_card_bg"
-            android:textColor="@color/purple_200"
+            android:background="@drawable/cancel_btn_style"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
             android:text="الغاء"
             android:textSize="18sp"
             android:textStyle="bold"/>

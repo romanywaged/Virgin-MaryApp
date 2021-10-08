@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/cancel_reservation_container"
+    tools:context=".followReservations.deleteEvent.EnterCodeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iconnnCode"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/app_icon"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:id="@+id/txttCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="cursive"
+            android:layout_below="@+id/iconnnCode"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/txtt2Code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followResevation"
+            android:layout_below="@+id/txttCode"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/purple_200"
+            android:layout_marginTop="30dp"
+            android:fontFamily="monospace"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+
+        <EditText
+            android:id="@+id/Edit_layoutCode"
+            style="@style/edit_text_sty"
+            android:textDirection="rtl"
+            android:layout_below="@id/txtt2Code"
+            android:layout_marginTop="30dp"
+            android:hint="@string/Code"
+            android:autofillHints="@string/Code"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/cancel_btn_Code"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/Edit_layoutCode"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/delete"
+            android:textColor="@color/purple_200"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/follow_reserv_card_bg"/>
+
+    </RelativeLayout>
+</ScrollView>

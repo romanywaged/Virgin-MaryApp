@@ -9,11 +9,12 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.church.virginmaryapp.R
 import com.church.virginmaryapp.models.booking.EventModule
+import com.church.virginmaryapp.models.follow.FollowEventModule
 import com.church.virginmaryapp.utils.CommonMethod
 import kotlinx.android.synthetic.main.follow_reservation_row.view.*
 import kotlinx.android.synthetic.main.item_event_list.view.*
 
-class FollowReservationsAdapter (private var eventList:ArrayList<EventModule>,
+class FollowReservationsAdapter (private var eventList:ArrayList<FollowEventModule>,
                                  private var listener:IFollowReservationsItemClick,
                                  private var context:Context)
                                  : RecyclerView.Adapter<FollowReservationsAdapter.MyFollowViewHolder>()
@@ -33,14 +34,19 @@ class FollowReservationsAdapter (private var eventList:ArrayList<EventModule>,
         val commonMethod = CommonMethod()
         var eventDate = ""
 
-        if (eventObject.eventDate != null && eventObject.eventDate != "00:00:00")
-            eventDate = eventObject.eventDate?.let { commonMethod.separateString(it) }.toString()
+        if (eventObject.eventDayDto?.eventDate != null && eventObject.eventDayDto?.eventDate != "00:00:00")
+            eventDate = eventObject.eventDayDto?.eventDate?.let { commonMethod.separateString(it) }.toString()
 
-        holder.eventTitleTv.text = eventObject.eventName
+        holder.eventTitleTv.text = eventObject.eventDayDto?.eventName
         holder.eventDateTv.text = eventDate
         holder.eventDayTv.text = commonMethod.getDayNameFromDate(eventDate)
-        holder.fromTimeTv.text = eventObject.startTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
-        holder.toTimeTv.text = eventObject.endTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
+        holder.fromTimeTv.text = eventObject.eventDayDto?.endTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
+        holder.toTimeTv.text = eventObject.eventDayDto?.endTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
+
+
+        holder.cancel_btn.setOnClickListener {
+            listener.clickEventToDelete(eventObject)
+        }
 
     }
 

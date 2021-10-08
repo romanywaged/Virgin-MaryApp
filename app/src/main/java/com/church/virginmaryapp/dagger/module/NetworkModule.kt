@@ -1,10 +1,12 @@
 package com.church.virginmaryapp.dagger.module
 
 import com.church.virginmaryapp.api.BookingAPI
+import com.church.virginmaryapp.api.CancelAPI
 import com.church.virginmaryapp.api.CategoryAPI
 import com.church.virginmaryapp.api.FollowReservation
 import com.church.virginmaryapp.booking.bookEvent.BookingInteractor
 import com.church.virginmaryapp.booking.showEvents.EventsInteractor
+import com.church.virginmaryapp.followReservations.deleteEvent.CancelingInteractor
 import com.church.virginmaryapp.followReservations.showFollowEvent.FollowReservationInteractor
 import com.church.virginmaryapp.utils.BASE_URL
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -28,6 +30,7 @@ class NetworkModule
     private var bookingApi : BookingAPI ?= null
 
     private var followReservation:FollowReservation ?= null
+    private var deletedObj:CancelAPI ? = null
 
 
     //----------------------------- Basic Providers ----------------------
@@ -112,6 +115,22 @@ class NetworkModule
     fun provideFollowInteractor() : FollowReservationInteractor
     {
         return FollowReservationInteractor(provideFollowApi())
+    }
+
+    @Provides
+    @Singleton
+    fun provideCancelApi() : CancelAPI
+    {
+        if(deletedObj == null)
+            deletedObj = provideRetrofit().create(CancelAPI::class.java)
+        return deletedObj!!
+    }
+
+    @Provides
+    @Singleton
+    fun provideCancellingInteractor() : CancelingInteractor
+    {
+        return CancelingInteractor(provideCancelApi())
     }
 }
 

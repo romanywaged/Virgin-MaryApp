@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/appicon"/>
+            android:src="@drawable/app_icon"/>
     </LinearLayout>
 
     <TextView

@@ -17,7 +17,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/appicon"
+        android:src="@drawable/app_icon"
         android:layout_marginTop="30dp"/>
 
     <TextView
@@ -59,6 +59,7 @@
             android:layout_below="@id/txtt2"
             android:layout_marginTop="30dp"
             android:hint="@string/national_id" />
+
         <Button
             android:id="@+id/search_btn"
             android:layout_width="130dp"

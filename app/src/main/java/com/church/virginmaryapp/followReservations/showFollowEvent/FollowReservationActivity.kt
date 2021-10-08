@@ -2,10 +2,12 @@ package com.church.virginmaryapp.followReservations.showFollowEvent
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.church.virginmaryapp.MyFreeApplication
@@ -13,9 +15,14 @@ import com.church.virginmaryapp.R
 import com.church.virginmaryapp.booking.showEvents.EventsPresenter
 import com.church.virginmaryapp.booking.showEvents.IEventsController
 import com.church.virginmaryapp.booking.showEvents.adapter.EventsListAdapter
+import com.church.virginmaryapp.followReservations.deleteEvent.CancelingPresenter
+import com.church.virginmaryapp.followReservations.deleteEvent.EnterCodeActivity
+import com.church.virginmaryapp.followReservations.deleteEvent.ICancelingController
+import com.church.virginmaryapp.followReservations.deleteEvent.RequestCancelingEvent
 import com.church.virginmaryapp.followReservations.showFollowEvent.adapter.FollowReservationsAdapter
 import com.church.virginmaryapp.followReservations.showFollowEvent.adapter.IFollowReservationsItemClick
 import com.church.virginmaryapp.models.booking.EventModule
+import com.church.virginmaryapp.models.follow.FollowEventModule
 import com.church.virginmaryapp.utils.CommonMethod
 import com.church.virginmaryapp.utils.MyApplicationSharedPreference
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,12 +42,13 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
     var presenter:FollowReservationsPresenter?=null
     private lateinit var shared : MyApplicationSharedPreference
     private lateinit var mAdapter: FollowReservationsAdapter
-    private val myEventsList = ArrayList<EventModule>()
+    private val myEventsList = ArrayList<FollowEventModule>()
     private lateinit var mLayoutManager: LinearLayoutManager
     private val commonMethod = CommonMethod()
 
     private var isAttached = false
     private var NationalId = ""
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +124,7 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
             followProgress.visibility = View.GONE
     }
 
-    override fun getEvents(eventsList: List<EventModule>)
+    override fun getEvents(eventsList: List<FollowEventModule>)
     {
         if(isAttached)
         {
@@ -139,6 +147,7 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
     }
 
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -156,7 +165,10 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
         isAttached = false
     }
 
-    override fun clickEventToDelete(eventModule: EventModule) {
-        TODO("Not yet implemented")
+    override fun clickEventToDelete(followEventModule: FollowEventModule) {
+        val intent:Intent = Intent(this, EnterCodeActivity::class.java)
+        intent.putExtra("Object",followEventModule)
+        startActivity(intent)
+
     }
 }

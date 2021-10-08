@@ -4,6 +4,7 @@ import com.church.virginmaryapp.booking.bookEvent.BookingEventActivity
 import com.church.virginmaryapp.booking.showEvents.EventListViewActivity
 import com.church.virginmaryapp.dagger.module.AppModule
 import com.church.virginmaryapp.dagger.module.NetworkModule
+import com.church.virginmaryapp.followReservations.deleteEvent.EnterCodeActivity
 import com.church.virginmaryapp.followReservations.showFollowEvent.FollowReservationActivity
 import javax.inject.Singleton
 import dagger.Component
@@ -22,4 +23,9 @@ interface NetworkComponent
     fun inject(bookingEventActivity: BookingEventActivity)
 
     fun inject(followReservationActivity: FollowReservationActivity)
+
+    fun inject (enterCodeActivity: EnterCodeActivity)
+
+
+
 }
