@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:id="@+id/national_id_container"
     tools:context=".followReservations.showFollowEvent.EnterNationalId">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="20dp"
         >
     <de.hdodenhof.circleimageview.CircleImageView
@@ -16,7 +16,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="10dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/app_icon"
         android:layout_marginTop="30dp"/>
 
@@ -38,18 +38,15 @@
         android:id="@+id/txtt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="متابعة حجوزاتى"
+        android:text="@string/follow_reservation"
         android:layout_below="@+id/txtt"
         android:layout_marginEnd="10dp"
         android:textColor="@color/purple_200"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
         android:fontFamily="monospace"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        />
-
+        android:layout_alignParentEnd="true"/>
 
         <EditText
             android:id="@+id/Edit_layout"
@@ -58,7 +55,8 @@
             android:textDirection="rtl"
             android:layout_below="@id/txtt2"
             android:layout_marginTop="30dp"
-            android:hint="@string/national_id" />
+            android:maxLength="14"
+            android:hint="@string/national_id"/>
 
         <Button
             android:id="@+id/search_btn"
@@ -67,7 +65,7 @@
             android:layout_below="@id/Edit_layout"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
-            android:text="بحث"
+            android:text="@string/search_for_cancel"
             android:textColor="@color/purple_200"
             android:textSize="18sp"
             android:textStyle="bold"

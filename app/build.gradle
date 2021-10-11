@@ -13,8 +13,8 @@ android {
         applicationId "com.church.virginmaryapp"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.4"
+        versionCode 5
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -80,6 +80,9 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
 
     implementation 'com.android.support:multidex:1.0.3'
+
+    //update alert googlePlay
+    implementation 'com.google.android.play:core:1.7.3'
 
 
     testImplementation 'junit:junit:4.+'

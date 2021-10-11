@@ -21,7 +21,9 @@
         tools:replace="android:allowBackup">
         <activity android:name=".followReservations.deleteEvent.EnterCodeActivity"
                   android:theme="@style/FollowReservation"
-            ></activity>
+            >
+
+        </activity>
         <activity
             android:name=".followReservations.showFollowEvent.EnterNationalId"
             android:theme="@style/FollowReservation" />

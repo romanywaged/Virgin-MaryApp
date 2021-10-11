@@ -30,17 +30,20 @@
     <string name="gender_error">من فضلك ادخل النوع</string>
 
     <string name="confirm_book">تم الحجز بنجاح من فضلك احتفظ بكود التسجيل لتتمكن من الحضور</string>
-    <string name="testCode">1492-01-202181</string>
+    <string name="testCode">1492–01-202181</string>
     <string name="describeHymens">جميع تماجيد والحان العدرا</string>
-    <string name="booking_aodas_describe">حجز جميع القداسات </string>
-    <string name="followResevation">متابعة حجوزاتى</string>
-    <string name="followResevation_desc">متابعة والغاء الحجوزات</string>
+    <string name="booking_pray_describe">حجز جميع القداسات </string>
+    <string name="follow_reservation">متابعة حجوزاتى</string>
+    <string name="follow_reservation_desc">متابعة والغاء الحجوزات</string>
     <string name="aya">كل يوم آيه</string>
     <string name="aya_desc">صوت ربنا ليك</string>
     <string name="about_desc">عن البرنامج وحقوق الملكيه</string>
-    <string name="Code">كود الحجز</string>
+    <string name="Code">123XXXXXXXXXXX</string>
     <string name="delete">الغاء</string>
     <string name="register_code">كود التسجيل</string>
     <string name="image_confirmation_describtion">Image Confirmation</string>
+    <string name="image_hymens">tranem</string>
+    <string name="code_info">اكتب الكود المكون من 14 رقم فقط</string>
+    <string name="search_for_cancel">بحث</string>
 
 </resources>

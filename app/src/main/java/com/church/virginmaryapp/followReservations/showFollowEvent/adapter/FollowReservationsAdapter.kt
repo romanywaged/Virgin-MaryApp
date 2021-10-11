@@ -40,7 +40,7 @@ class FollowReservationsAdapter (private var eventList:ArrayList<FollowEventModu
         holder.eventTitleTv.text = eventObject.eventDayDto?.eventName
         holder.eventDateTv.text = eventDate
         holder.eventDayTv.text = commonMethod.getDayNameFromDate(eventDate)
-        holder.fromTimeTv.text = eventObject.eventDayDto?.endTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
+        holder.fromTimeTv.text = eventObject.eventDayDto?.startTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
         holder.toTimeTv.text = eventObject.eventDayDto?.endTime?.substring(0, 5)?.let { commonMethod.convert24Hto12H(it) }
 
 

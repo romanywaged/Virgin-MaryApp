@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:id="@+id/cancel_reservation_container"
-    tools:context=".followReservations.deleteEvent.EnterCodeActivity">
+    tools:context=".followReservations.deleteEvent.EnterCodeActivity"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iconnnCode"
+            android:id="@+id/icon_enter_code"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -23,7 +24,7 @@
             android:layout_marginTop="30dp"/>
 
         <TextView
-            android:id="@+id/txttCode"
+            android:id="@+id/txt_tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
@@ -32,16 +33,16 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="cursive"
-            android:layout_below="@+id/iconnnCode"
+            android:layout_below="@+id/icon_enter_code"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/txtt2Code"
+            android:id="@+id/txt_second_tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/followResevation"
-            android:layout_below="@+id/txttCode"
+            android:text="@string/follow_reservation"
+            android:layout_below="@+id/txt_tittle"
             android:layout_marginEnd="10dp"
             android:textColor="@color/purple_200"
             android:layout_marginTop="30dp"
@@ -49,16 +50,31 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"/>
+        <TextView
+            android:id="@+id/txt_third_tittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_info"
+            android:layout_below="@+id/txt_second_tittle"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/purple_200"
+            android:layout_marginTop="30dp"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
 
         <EditText
             android:id="@+id/Edit_layoutCode"
             style="@style/edit_text_sty"
             android:textDirection="rtl"
-            android:layout_below="@id/txtt2Code"
+            android:layout_below="@id/txt_third_tittle"
             android:layout_marginTop="30dp"
             android:hint="@string/Code"
             android:autofillHints="@string/Code"
-            android:inputType="text" />
+            android:inputType="number"
+            android:singleLine="true"
+            android:maxLength="14" />
 
         <Button
             android:id="@+id/cancel_btn_Code"

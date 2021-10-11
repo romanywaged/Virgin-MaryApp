@@ -87,7 +87,7 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
             followProgress.visibility = View.VISIBLE
             presenter!!.getFollowControllerEventList(NationalId)
         } else
-            commonMethod.showSnackBarFromResource(eventsListContainer, R.string.no_internet_connection, this)
+            commonMethod.showSnackBarFromResource(follow_container, R.string.no_internet_connection, this)
     }
 
     private fun initRecyclerView()
@@ -143,7 +143,7 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
 
     override fun getError(msg: String) {
         if(isAttached)
-            commonMethod.showSnackBarFromString(eventsListContainer, msg)
+            commonMethod.showSnackBarFromString(follow_container, msg)
     }
 
 
@@ -169,6 +169,6 @@ class FollowReservationActivity : AppCompatActivity(), IFollowController.View, I
         val intent:Intent = Intent(this, EnterCodeActivity::class.java)
         intent.putExtra("Object",followEventModule)
         startActivity(intent)
-
+        finish()
     }
 }
